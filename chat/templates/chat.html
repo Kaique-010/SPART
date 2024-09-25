@@ -1,0 +1,223 @@
+{% extends "base.html" %}
+
+{% block title %}Chat - SPART{% endblock %}
+
+{% block content %}
+<style>
+    h1 {
+        text-align: center;
+        color: burlywood;
+        font-size: x-large;
+    }
+
+    p {
+        text-align: center;
+        color: burlywood;
+        text-decoration: underline;
+    }
+
+    h5 {
+        color: burlywood;
+    }
+
+    /* Form de Perguntas */
+
+    .form-control {
+        background-color: #3c3939; 
+        color: burlywood; 
+        border: 0.3px solid #bdcbc8; 
+    }
+
+    .form-control::placeholder {
+        color: rgba(226, 206, 92, 0.7); /* Cor do texto do placeholder */
+    }
+    #chat-card {
+        margin: 20px auto;
+        max-width: 1300px;
+        padding: 45px;
+        border-radius: 25px;
+        background-color: #232323;
+        color: burlywood;
+    }
+        /* Footer*/
+
+    footer {
+        position: relative;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background-color: #1c1c1c;
+        padding: 35px 0;
+        text-align: center;
+        box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.3);
+        color: burlywood;
+    }
+
+    #footer-content {
+        margin: 0 80px;
+    }
+
+            /* body */
+
+    body {
+        padding-bottom: 60px;
+        background-color: #121212;
+    }
+
+    .list-group-item {
+        background-color: #3c3939;
+        border: none;
+    }
+
+    .list-group-item a {
+        color: burlywood;
+    }
+
+    .list-group-item a:hover {
+        text-decoration: underline;
+    }
+
+    .custom-btn {
+        border: none;
+        border-radius: 8px;
+        padding: 10px 15px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s, transform 0.2s;
+        display: flex;
+        align-items: center;
+        margin: 0 10px;
+    }
+
+    .custom-btn i {
+        margin-right: 5px;
+    }
+
+    .custom-btn.success {
+        background-color: #0c1330;
+        color: burlywood;
+        border: 0.3px solid #fdfed7; 
+    }
+
+    .custom-btn.success:hover {
+        background-color: #73cab8;
+        transform: translateY(-2px);
+    }
+
+    .custom-btn.danger {
+        background-color: #dc3545;
+        color: white;
+    }
+
+    .custom-btn.danger:hover {
+        background-color: #c82333;
+        transform: translateY(-2px);
+    }
+
+    .custom-btn:disabled {
+        background-color: #6c757d;
+        cursor: not-allowed;
+    }
+
+    .button-container {
+        display: flex; /* Define um flex container */
+        justify-content: center; /* Centraliza os itens horizontalmente */
+        margin-top: 20px; /* Espaçamento superior, se desejar */
+    }
+
+    .card-resposta {
+        border: 2px solid #ffd9a8;
+        border-radius: 10px;
+        padding: 15px;
+        background-color: #1c1c1c;
+    }
+</style>
+
+<div class="card" id="chat-card">
+
+    <h1>SPART <img src='/static/capacete.png' style="height: 37px; width: 40px;" /></h1>
+    <p>Seu Assistente Inteligente!!!</p>
+    <br><br>
+    
+    <input type="text" id="pergunta" class="form-control" placeholder="Escreva Aqui a Sua Dúvida!">
+    <div class="mt-4 button-container">
+        <button class="custom-btn success" onclick="enviarPergunta()">
+            <i class="fas fa-paper-plane"></i> Enviar
+        </button>
+        <button class="custom-btn danger" id="pararBtn" onclick="pararEscrita()" disabled>
+            <i class="fas fa-stop"></i> Parar
+        </button>
+    </div>
+    <br>
+    <div class="card-resposta">
+        <div id="resposta" class="mt-3">
+            <img src='/static/capacete.png' style="height: 20px; width: 22px;" /></h1> <!-- Altere o ícone conforme necessário -->
+            <span id="resposta-texto"></span>
+        </div>
+    </div>
+    
+
+    <script>
+        let typingInterval;
+        let respostaCompleta = "";
+        let i = 0;
+
+        async function enviarPergunta() {
+            const pergunta = document.getElementById("pergunta").value;
+            document.getElementById("resposta").innerHTML = "<span>Carregando...</span>";
+            document.getElementById("pararBtn").disabled = true; // Desabilita o botão Parar
+
+            try {
+                const response = await fetch(`/chat/perguntar/?pergunta=${encodeURIComponent(pergunta)}`);
+                if (!response.ok) {
+                    throw new Error('Erro na resposta do servidor');
+                }
+                const data = await response.json();
+                respostaCompleta = data.resposta || "Desculpe, não consegui responder.";
+                escreverResposta();
+            } catch (error) {
+                document.getElementById("resposta").innerText = "Erro ao enviar a pergunta: " + error.message;
+            }
+        }
+
+        function escreverResposta() {
+            const respostaDiv = document.getElementById("resposta");
+            respostaDiv.innerHTML = ""; // Limpa a resposta anterior
+            i = 0;
+
+            function typingEffect() {
+                if (i < respostaCompleta.length) {
+                    respostaDiv.innerHTML += respostaCompleta.charAt(i);
+                    i++;
+                    typingInterval = setTimeout(typingEffect, 5); // Ajuste a velocidade aqui
+                } else {
+                    document.getElementById("pararBtn").disabled = true; // Reabilita o botão ao final
+                }
+            }
+
+            typingEffect();
+            document.getElementById("pararBtn").disabled = false;
+        }
+
+        function pararEscrita() {
+            clearTimeout(typingInterval);
+            document.getElementById("pararBtn").disabled = true; // Desabilita o botão Parar
+        }
+    </script>
+
+    <footer>
+        <div id="footer-content">
+            <h5>Sugestões de Perguntas:</h5>
+            <ul class="list-group">
+                {% for sugestao in sugerir_perguntas %}
+                <li class="list-group-item">
+                    <a href="#" onclick="document.getElementById('pergunta').value='{{ sugestao }}'; enviarPergunta();">
+                        {{ sugestao }}
+                    </a>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </footer>
+
+{% endblock %}
