@@ -1,6 +1,9 @@
-import requests
-from bs4 import BeautifulSoup
-from sklearn.feature_extraction.text import TfidfVectorizer
+import requests  # type: ignore
+from bs4 import BeautifulSoup  # type: ignore
+from sklearn.metrics.pairwise import cosine_similarity  # type: ignore
+from gensim.models import Word2Vec  # type: ignore
+import numpy as np  # type: ignore
+from sklearn.feature_extraction.text import TfidfVectorizer  # type: ignore
 
 def extrair_links_manuais(url):
     headers = {
@@ -14,7 +17,6 @@ def extrair_links_manuais(url):
     soup = BeautifulSoup(response.text, 'html.parser')
     links = [link['href'] for link in soup.find_all('a', href=True)]
     return links
-
 
 def extrair_conteudo(link):
     headers = {
@@ -41,3 +43,13 @@ def gerar_palavras_chave(texto):
     
     palavras_chave = feature_array[tfidf_sorting][:10]  
     return ', '.join(palavras_chave)
+
+def treinar_modelo_word2vec(sentencas):
+    """
+    Treina um modelo Word2Vec com uma lista de sentenças.
+    
+    :param sentencas: List of sentences (list of list of words)
+    :return: modelo Word2Vec treinado
+    """
+    modelo = Word2Vec(sentencas, vector_size=100, window=5, min_count=1, workers=4)
+    return modelo

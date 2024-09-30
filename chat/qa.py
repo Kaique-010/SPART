@@ -1,10 +1,11 @@
-from sklearn.feature_extraction.text import TfidfVectorizer
-import numpy as np
+from sklearn.feature_extraction.text import TfidfVectorizer  # type: ignore
+import numpy as np  # type: ignore
 from chat.utils import gerar_palavras_chave
 
 def responder_pergunta(pergunta, manuais):
+    # Gere as palavras-chave da pergunta
     palavras_chave_pergunta = gerar_palavras_chave(pergunta)
-    
+
     # Obtenha os conteúdos dos manuais e suas palavras-chave
     conteudos = [manual.conteudo for manual in manuais]
     palavras_chave_manuais = [manual.palavras_chave for manual in manuais]
@@ -17,7 +18,7 @@ def responder_pergunta(pergunta, manuais):
     X = vectorizer.fit_transform(documentos)
 
     # Calcule a similaridade da pergunta com os manuais
-    similaridades = np.dot(X[0], X[1:].T).toarray().flatten()
+    similaridades = X[0].dot(X[1:].T).toarray().flatten()  # Melhorar a legibilidade
 
     # Encontre o índice do manual mais similar
     indice_mais_similar = np.argmax(similaridades)
@@ -27,7 +28,6 @@ def responder_pergunta(pergunta, manuais):
         manual = manuais[indice_mais_similar]
         resposta_formatada = (
             f"Para sua pergunta sobre '{pergunta}', aqui estão as informações relevantes:\n\n"
-            
             f"{manual.conteudo.replace('\n', '\n\n')}\n\n"  # Duas quebras de linha para separar parágrafos
             f"[Leia mais aqui]({manual.link})"
         )
