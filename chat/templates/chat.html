@@ -13,7 +13,11 @@
     p {
         text-align: center;
         color: burlywood;
-        font-size: xx-large
+        font-size: small;
+    }
+
+    h4 {
+        text-align: center;
     }
 
     h5 {
@@ -25,7 +29,6 @@
     }
 
     /* Form de Perguntas */
-
     .form-control {
         background-color: #3c3939;
         color: burlywood;
@@ -34,7 +37,6 @@
 
     .form-control::placeholder {
         color: rgba(226, 206, 92, 0.7);
-        /* Cor do texto do placeholder */
     }
 
     #chat-card {
@@ -46,8 +48,7 @@
         color: burlywood;
     }
 
-    /* Footer*/
-
+    /* Footer */
     footer {
         position: relative;
         bottom: 0;
@@ -123,11 +124,8 @@
 
     .button-container {
         display: flex;
-        /* Define um flex container */
         justify-content: center;
-        /* Centraliza os itens horizontalmente */
         margin-top: 20px;
-        /* Espaçamento superior, se desejar */
     }
 
     .card-resposta {
@@ -139,10 +137,9 @@
 </style>
 
 <div class="card" id="chat-card">
-
     <h1>SPART <img src='/static/capacete.png' style="height: 37px; width: 40px;" /></h1>
     <h6>Seu Assistente Inteligente!!!</h6>
-    <p>Como Posso lhe ajudar hoje?</p>
+    <h4>Como Posso lhe ajudar hoje?</h4>
     <br><br>
 
     <input type="text" id="pergunta" class="form-control" placeholder="Escreva Aqui a Sua Dúvida!">
@@ -156,75 +153,90 @@
     </div>
     <br>
     <div class="card-resposta">
-        <div id="resposta" class="mt-3">
-            <img src='/static/capacete.png' style="height: 20px; width: 22px;" /></h1>
-            <!-- Altere o ícone conforme necessário -->
-            <span id="resposta-texto"></span>
-        </div>
+        <div id="resposta" class="mt-3"></div>
+        <img src='/static/capacete.png' style="height: 20px; width: 22px;" />
+        <span id="resposta-texto"></span>
     </div>
+</div>
 
+<script>
+    let respostaCompleta = "";
+    let typingInterval;
 
-    <script>
-        let typingInterval;
-        let respostaCompleta = "";
-        let i = 0;
+    async function enviarPergunta() {
+        const pergunta = document.getElementById("pergunta").value;
+        document.getElementById("resposta").innerHTML = "<span>Carregando...</span>";
+        document.getElementById("pararBtn").disabled = true;
 
-        async function enviarPergunta() {
-            const pergunta = document.getElementById("pergunta").value;
-            document.getElementById("resposta").innerHTML = "<span>Carregando...</span>";
-            document.getElementById("pararBtn").disabled = true; // Desabilita o botão Parar
-
-            try {
-                const response = await fetch(`/chat/perguntar/?pergunta=${encodeURIComponent(pergunta)}`);
-                if (!response.ok) {
-                    throw new Error('Erro na resposta do servidor');
-                }
-                const data = await response.json();
-                respostaCompleta = data.resposta || "Desculpe, não consegui responder.";
-                escreverResposta();
-            } catch (error) {
-                document.getElementById("resposta").innerText = "Erro ao enviar a pergunta: " + error.message;
+        try {
+            const response = await fetch(`/chat/perguntar/?pergunta=${encodeURIComponent(pergunta)}`);
+            if (!response.ok) {
+                throw new Error('Erro na resposta do servidor');
             }
+            const data = await response.json();
+            respostaCompleta = data.resposta || "Desculpe, não consegui responder.";
+            escreverResposta(respostaCompleta, 0.08);
+        } catch (error) {
+            document.getElementById("resposta").innerText = "Erro ao enviar a pergunta: " + error.message;
         }
+    }
 
-        function escreverResposta() {
-            const respostaDiv = document.getElementById("resposta");
-            respostaDiv.innerHTML = ""; // Limpa a resposta anterior
-            i = 0;
+    // Função para gerar a resposta com efeito de digitação
+    function escreverResposta(resposta, intervalo) {
+        const respostaDiv = document.getElementById("resposta");
+        respostaDiv.innerHTML = ""; // Limpa a resposta anterior
+        let index = 0; // Índice para percorrer a resposta
 
-            function typingEffect() {
-                if (i < respostaCompleta.length) {
-                    respostaDiv.innerHTML += respostaCompleta.charAt(i);
-                    i++;
-                    typingInterval = setTimeout(typingEffect, 5); // Ajuste a velocidade aqui
-                } else {
-                    document.getElementById("pararBtn").disabled = true; // Reabilita o botão ao final
-                }
+        typingInterval = setInterval(() => {
+            if (index < resposta.length) {
+                respostaDiv.innerHTML += resposta.charAt(index);
+                index++;
+            } else {
+                clearInterval(typingInterval); // Limpa o intervalo após a escrita
+                document.getElementById("pararBtn").disabled = false; // Habilita o botão Parar
+
+                // Chama a função de formatação após a escrita completa
+                formatarResposta();
             }
+        }, intervalo); // O intervalo define a velocidade da digitação
+    }
 
-            typingEffect();
-            document.getElementById("pararBtn").disabled = false;
-        }
+    // Função para formatar a resposta
+    function formatarResposta() {
+        const respostaDiv = document.getElementById("resposta");
+        respostaDiv.innerHTML = respostaCompleta.replace(/\n/g, "<br>"); // Formata a resposta com quebras de linha
+    }
 
-        function pararEscrita() {
-            clearTimeout(typingInterval);
-            document.getElementById("pararBtn").disabled = true; // Desabilita o botão Parar
-        }
-    </script>
+    // Função para parar a escrita
+    function pararEscrita() {
+        clearInterval(typingInterval); // Limpa o intervalo do efeito de digitação
+        const respostaDiv = document.getElementById("resposta");
+        respostaDiv.innerHTML = respostaCompleta; // Exibe a resposta completa
+        formatarResposta(); // Chama a função para formatar a resposta
+        document.getElementById("pararBtn").disabled = true; // Desabilita o botão Parar
+    }
 
-    <footer>
-        <div id="footer-content">
-            <h5>Sugestões de Perguntas:</h5>
-            <ul class="list-group">
-                {% for sugestao in sugerir_perguntas %}
-                <li class="list-group-item">
-                    <a href="#" onclick="document.getElementById('pergunta').value='{{ sugestao }}'; enviarPergunta();">
-                        {{ sugestao }}
-                    </a>
-                </li>
-                {% endfor %}
-            </ul>
-        </div>
-    </footer>
+    // Evento do botão de envio
+    document.getElementById('gerarResposta').addEventListener('click', enviarPergunta);
 
-    {% endblock %}
+    // Evento do botão Parar
+    document.getElementById('pararBtn').addEventListener('click', pararEscrita);
+
+</script>
+
+<footer>
+    <div id="footer-content">
+        <h5>Sugestões de Perguntas:</h5>
+        <ul class="list-group">
+            {% for sugestao in sugerir_perguntas %}
+            <li class="list-group-item">
+                <a href="#" onclick="document.getElementById('pergunta').value='{{ sugestao }}'; enviarPergunta();">
+                    {{ sugestao }}
+                </a>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</footer>
+
+{% endblock %}

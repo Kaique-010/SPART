@@ -1,3 +1,10 @@
+#views.py
+
+from django.http import JsonResponse
+from django.shortcuts import render
+from .models import Manual
+from .qa import responder_pergunta
+
 from django.http import JsonResponse
 from django.shortcuts import render
 from .models import Manual
@@ -13,7 +20,6 @@ def perguntar(request):
     return JsonResponse(resposta)
 
 def home(request):
-    
     return render(request, 'home.html')
 
 def chat(request):
