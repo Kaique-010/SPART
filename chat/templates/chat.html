@@ -13,24 +13,30 @@
     p {
         text-align: center;
         color: burlywood;
-        text-decoration: underline;
+        font-size: xx-large
+
     }
 
     h5 {
         color: burlywood;
     }
+    h6{
+        text-align: center;
+    }
 
     /* Form de Perguntas */
 
     .form-control {
-        background-color: #3c3939; 
-        color: burlywood; 
-        border: 0.3px solid #bdcbc8; 
+        background-color: #3c3939;
+        color: burlywood;
+        border: 0.3px solid #bdcbc8;
     }
 
     .form-control::placeholder {
-        color: rgba(226, 206, 92, 0.7); /* Cor do texto do placeholder */
+        color: rgba(226, 206, 92, 0.7);
+        /* Cor do texto do placeholder */
     }
+
     #chat-card {
         margin: 20px auto;
         max-width: 1300px;
@@ -39,7 +45,8 @@
         background-color: #232323;
         color: burlywood;
     }
-        /* Footer*/
+
+    /* Footer*/
 
     footer {
         position: relative;
@@ -53,11 +60,7 @@
         color: burlywood;
     }
 
-    #footer-content {
-        margin: 0 80px;
-    }
-
-            /* body */
+    /* body */
 
     body {
         padding-bottom: 60px;
@@ -96,7 +99,7 @@
     .custom-btn.success {
         background-color: #0c1330;
         color: burlywood;
-        border: 0.3px solid #fdfed7; 
+        border: 0.3px solid #fdfed7;
     }
 
     .custom-btn.success:hover {
@@ -120,9 +123,12 @@
     }
 
     .button-container {
-        display: flex; /* Define um flex container */
-        justify-content: center; /* Centraliza os itens horizontalmente */
-        margin-top: 20px; /* Espaçamento superior, se desejar */
+        display: flex;
+        /* Define um flex container */
+        justify-content: center;
+        /* Centraliza os itens horizontalmente */
+        margin-top: 20px;
+        /* Espaçamento superior, se desejar */
     }
 
     .card-resposta {
@@ -136,9 +142,10 @@
 <div class="card" id="chat-card">
 
     <h1>SPART <img src='/static/capacete.png' style="height: 37px; width: 40px;" /></h1>
-    <p>Seu Assistente Inteligente!!!</p>
+    <h6>Seu Assistente Inteligente!!!</h6>
+    <p>Como Posso lhe ajudar hoje?</p>
     <br><br>
-    
+
     <input type="text" id="pergunta" class="form-control" placeholder="Escreva Aqui a Sua Dúvida!">
     <div class="mt-4 button-container">
         <button class="custom-btn success" onclick="enviarPergunta()">
@@ -151,11 +158,12 @@
     <br>
     <div class="card-resposta">
         <div id="resposta" class="mt-3">
-            <img src='/static/capacete.png' style="height: 20px; width: 22px;" /></h1> <!-- Altere o ícone conforme necessário -->
+            <img src='/static/capacete.png' style="height: 20px; width: 22px;" /></h1>
+            <!-- Altere o ícone conforme necessário -->
             <span id="resposta-texto"></span>
         </div>
     </div>
-    
+
 
     <script>
         let typingInterval;
@@ -220,4 +228,4 @@
         </div>
     </footer>
 
-{% endblock %}
+    {% endblock %}

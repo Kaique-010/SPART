@@ -8,8 +8,8 @@ def perguntar(request):
     if not pergunta:
         return JsonResponse({'error': 'Por favor, insira uma pergunta.'}, status=400)
 
-    manuais = list(Manual.objects.all())   # Pegue todos os objetos do modelo Manual
-    resposta = responder_pergunta(pergunta, manuais)  # Passa os objetos diretamente
+    manuais = list(Manual.objects.all())  
+    resposta = responder_pergunta(pergunta, manuais)  
     return JsonResponse(resposta)
 
 def home(request):
@@ -20,6 +20,6 @@ def chat(request):
     sugerir_perguntas = [
         "Como emitir uma nota fiscal?",
         "Qual NCM utilizar?",
-        "Como realizar vendas em frente de caixa?",
+        "Como emitir uma nota de devolução",
     ]
     return render(request, 'chat.html', {'sugerir_perguntas': sugerir_perguntas})
