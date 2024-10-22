@@ -3,3 +3,4 @@ venv
 .vscode
  venv
  Scripts
+ db.sqlite3
