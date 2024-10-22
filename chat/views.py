@@ -15,24 +15,13 @@ def perguntar(request):
     if not pergunta:
         return JsonResponse({'error': 'Por favor, insira uma pergunta.'}, status=400)
 
-    # Você pode usar um filtro para encontrar um manual relevante
-    manuais = Manual.objects.filter(titulo__icontains=pergunta)  # Ajuste o filtro conforme necessário
-
-    if not manuais.exists():
-        return JsonResponse({'error': 'Nenhum manual encontrado para a pergunta.'}, status=404)
-
-    resposta_texto = ""
-    imagens = []
-
-    for manual in manuais:
-        resposta_texto += manual.conteudo + "\n"  # Ou outra lógica para compor a resposta
-        imagens += [imagem.imagem.url for imagem in manual.imagens.all()]  # Assumindo que você tem um campo relacionado para imagens
-
-    resposta = {
-        "resposta": resposta_texto.strip(),
-        "imagens": imagens,
+    manuais = list(Manual.objects.all())
+    imagens = {
+        manual.id: [imagem.imagem.url for imagem in manual.imagens.all()]
+        for manual in manuais
     }
 
+    resposta = responder_pergunta(pergunta, manuais, imagens)
     return JsonResponse(resposta)
 
 
