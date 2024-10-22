@@ -134,6 +134,19 @@
         padding: 15px;
         background-color: #1c1c1c;
     }
+    .image-gallery {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 15px;
+        margin-top: 10px;
+    }
+    
+    .image-gallery img {
+        border-radius: 5px;
+        border: 1px solid #ddd;
+        max-width: 100%;
+        height: auto;
+    }
 </style>
 
 <div class="card" id="chat-card">
@@ -150,12 +163,20 @@
         <button class="custom-btn danger" id="pararBtn" onclick="pararEscrita()" disabled>
             <i class="fas fa-stop"></i> Parar
         </button>
+        <button class="custom-btn success" onclick="lerTexto()">
+            <i class="fas fa-volume-up"></i> Ouvir Resposta
+        </button>
     </div>
     <br>
+
     <div class="card-resposta">
         <div id="resposta" class="mt-3"></div>
         <img src='/static/capacete.png' style="height: 20px; width: 22px;" />
         <span id="resposta-texto"></span>
+        {{ manual.conteudo|safe }}
+        {% if manual.imagem %}
+        <img src="{{ manual.imagem.url }}" alt="Imagem do Manual" style="max-width: 100%; height: auto;">
+        {% endif %}
     </div>
 </div>
 
@@ -175,53 +196,57 @@
             }
             const data = await response.json();
             respostaCompleta = data.resposta || "Desculpe, não consegui responder.";
-            escreverResposta(respostaCompleta, 0.08);
+
+            // Exibir a resposta e as imagens
+            escreverResposta(respostaCompleta, data.imagens);
         } catch (error) {
             document.getElementById("resposta").innerText = "Erro ao enviar a pergunta: " + error.message;
         }
     }
 
-    // Função para gerar a resposta com efeito de digitação
-    function escreverResposta(resposta, intervalo) {
+    function escreverResposta(resposta, imagens) {
         const respostaDiv = document.getElementById("resposta");
-        respostaDiv.innerHTML = ""; // Limpa a resposta anterior
-        let index = 0; // Índice para percorrer a resposta
-
-        typingInterval = setInterval(() => {
-            if (index < resposta.length) {
-                respostaDiv.innerHTML += resposta.charAt(index);
-                index++;
-            } else {
-                clearInterval(typingInterval); // Limpa o intervalo após a escrita
-                document.getElementById("pararBtn").disabled = false; // Habilita o botão Parar
-
-                // Chama a função de formatação após a escrita completa
-                formatarResposta();
-            }
-        }, intervalo); // O intervalo define a velocidade da digitação
+        respostaDiv.innerHTML = "";
+        respostaDiv.innerHTML += resposta.replace(/\n/g, "<br>");
+    
+        // Exibir as imagens
+        if (imagens && imagens.length > 0) {
+            const galeria = document.createElement('div');
+            galeria.className = "image-gallery"; // Adicione uma classe para estilização
+            imagens.forEach(imagem => {
+                const imgElement = document.createElement('img');
+                imgElement.src = imagem;
+                imgElement.alt = "Imagem do Manual";
+                imgElement.style.maxWidth = "100%"; // Ajusta a largura das imagens
+                imgElement.style.height = "auto"; // Mantém a proporção
+                galeria.appendChild(imgElement);
+            });
+            respostaDiv.appendChild(galeria);
+        }
+    
+        document.getElementById("pararBtn").disabled = false;
     }
 
-    // Função para formatar a resposta
     function formatarResposta() {
         const respostaDiv = document.getElementById("resposta");
-        respostaDiv.innerHTML = respostaCompleta.replace(/\n/g, "<br>"); // Formata a resposta com quebras de linha
+        respostaDiv.innerHTML = respostaCompleta.replace(/\n/g, "<br>");
     }
 
-    // Função para parar a escrita
     function pararEscrita() {
-        clearInterval(typingInterval); // Limpa o intervalo do efeito de digitação
-        const respostaDiv = document.getElementById("resposta");
-        respostaDiv.innerHTML = respostaCompleta; // Exibe a resposta completa
-        formatarResposta(); // Chama a função para formatar a resposta
-        document.getElementById("pararBtn").disabled = true; // Desabilita o botão Parar
+        clearInterval(typingInterval);
+        document.getElementById("resposta").innerHTML = respostaCompleta;
+        formatarResposta();
+        document.getElementById("pararBtn").disabled = true;
     }
 
-    // Evento do botão de envio
-    document.getElementById('gerarResposta').addEventListener('click', enviarPergunta);
-
-    // Evento do botão Parar
-    document.getElementById('pararBtn').addEventListener('click', pararEscrita);
-
+    function lerTexto() {
+        const conteudo = document.getElementById("resposta").innerText;
+        const synth = window.speechSynthesis;
+        const utterance = new SpeechSynthesisUtterance(conteudo);
+        utterance.lang = 'pt-BR';
+        utterance.rate = 2;  // Velocidade normal
+        synth.speak(utterance);
+    }
 </script>
 
 <footer>

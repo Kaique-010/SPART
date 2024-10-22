@@ -2,12 +2,17 @@
 
 from sklearn.feature_extraction.text import TfidfVectorizer  # type: ignore
 import numpy as np  # type: ignore
+from chat.models import Manual
 from chat.utils import gerar_palavras_chave
 from sumy.parsers.plaintext import PlaintextParser
 from sumy.nlp.tokenizers import Tokenizer
 from sumy.summarizers.lsa import LsaSummarizer
 from nltk.tokenize import sent_tokenize
 from django.utils.safestring import mark_safe
+import os
+from django.http import JsonResponse
+
+
 
 def resumir_texto(texto):
     try:
@@ -19,6 +24,8 @@ def resumir_texto(texto):
     summarizer = LsaSummarizer()
     resumo = summarizer(parser.document, 5)  # Limitar a 5 frases no resumo
     return ' '.join(str(frase) for frase in resumo)
+
+
 
 def responder_pergunta(pergunta, manuais):
     palavras_chave_pergunta = gerar_palavras_chave(pergunta)
@@ -58,3 +65,13 @@ def responder_pergunta(pergunta, manuais):
         "resposta": mark_safe(resposta_formatada),
         "sugerir_mais": "Você gostaria de saber sobre mais alguma coisa?"
     }
+
+
+
+
+def buscar_manual(request, manual_id):
+    manual = Manual.objects.get(id=manual_id)
+    return JsonResponse({
+        'titulo': manual.titulo,
+        'conteudo': manual.conteudo,
+    })

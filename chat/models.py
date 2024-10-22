@@ -6,6 +6,7 @@ class Manual(models.Model):
     conteudo = models.TextField()
     link = models.URLField()
     palavras_chave = models.TextField(blank=True)  
+    
 
     def save(self, *args, **kwargs):
         # Se houver conteúdo e as palavras-chave não estiverem definidas, gera automaticamente
@@ -15,3 +16,12 @@ class Manual(models.Model):
 
     def __str__(self):
         return self.titulo
+
+
+class ImagemManual(models.Model):
+    manual = models.ForeignKey(Manual, related_name='imagens', on_delete=models.CASCADE)
+    imagem = models.ImageField(upload_to='manuais/')
+    descricao = models.CharField(max_length=200, blank=True, null=True)  # Descrição opcional da imagem
+
+    def __str__(self):
+        return f"Imagem para {self.manual.titulo}"
