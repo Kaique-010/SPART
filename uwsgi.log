@@ -1950,3 +1950,777 @@ Not Found: /favicon.ico
 [pid: 1031|app: 0|req: 9/34] 45.227.180.158 () {44 vars in 910 bytes} [Tue Oct 22 08:57:15 2024] GET /chat/ => generated 9778 bytes in 1 msecs (HTTP/1.1 200) 6 headers in 208 bytes (2 switches on core 0)
 [pid: 1029|app: 0|req: 26/35] 45.227.180.158 () {42 vars in 801 bytes} [Tue Oct 22 08:57:20 2024] GET /chat/perguntar/?pergunta=credito => generated 139 bytes in 1193 msecs (HTTP/1.1 200) 6 headers in 199 bytes (2 switches on core 1)
 [pid: 1031|app: 0|req: 10/36] 45.227.180.158 () {42 vars in 893 bytes} [Tue Oct 22 08:57:33 2024] GET /chat/perguntar/?pergunta=Como%20emitir%20uma%20nota%20de%20devolu%C3%A7%C3%A3o => generated 2103 bytes in 1175 msecs (HTTP/1.1 200) 6 headers in 200 bytes (2 switches on core 1)
+[pid: 1029|app: 0|req: 27/37] 45.227.180.158 () {46 vars in 941 bytes} [Tue Oct 22 09:05:30 2024] GET /chat/ => generated 9778 bytes in 0 msecs (HTTP/1.1 200) 6 headers in 208 bytes (2 switches on core 0)
+[pid: 1033|app: 0|req: 1/38] 45.227.180.158 () {46 vars in 941 bytes} [Tue Oct 22 09:05:32 2024] GET /chat/ => generated 11319 bytes in 279 msecs (HTTP/1.1 200) 6 headers in 209 bytes (2 switches on core 0)
+Internal Server Error: /chat/perguntar/
+Traceback (most recent call last):
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/db/backends/sqlite3/base.py", line 354, in execute
+    return super().execute(query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: no such table: chat_manual
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/var/www/SPART/chat/views.py", line 18, in perguntar
+    manuais = list(Manual.objects.all())
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/db/models/query.py", line 400, in __iter__
+    self._fetch_all()
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/db/models/query.py", line 1928, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/db/models/query.py", line 91, in __iter__
+    results = compiler.execute_sql(
+              ^^^^^^^^^^^^^^^^^^^^^
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/db/models/sql/compiler.py", line 1574, in execute_sql
+    cursor.execute(sql, params)
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/db/backends/utils.py", line 122, in execute
+    return super().execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/db/backends/utils.py", line 79, in execute
+    return self._execute_with_wrappers(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/db/backends/utils.py", line 92, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/db/backends/utils.py", line 100, in _execute
+    with self.db.wrap_database_errors:
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/db/utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/db/backends/sqlite3/base.py", line 354, in execute
+    return super().execute(query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+django.db.utils.OperationalError: no such table: chat_manual
+[pid: 1029|app: 0|req: 28/39] 45.227.180.158 () {42 vars in 801 bytes} [Tue Oct 22 09:05:38 2024] GET /chat/perguntar/?pergunta=credito => generated 117064 bytes in 47 msecs (HTTP/1.1 500) 7 headers in 243 bytes (2 switches on core 1)
+Internal Server Error: /chat/perguntar/
+Traceback (most recent call last):
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/db/backends/sqlite3/base.py", line 354, in execute
+    return super().execute(query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: no such table: chat_manual
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/var/www/SPART/chat/views.py", line 18, in perguntar
+    manuais = list(Manual.objects.all())
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/db/models/query.py", line 400, in __iter__
+    self._fetch_all()
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/db/models/query.py", line 1928, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/db/models/query.py", line 91, in __iter__
+    results = compiler.execute_sql(
+              ^^^^^^^^^^^^^^^^^^^^^
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/db/models/sql/compiler.py", line 1574, in execute_sql
+    cursor.execute(sql, params)
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/db/backends/utils.py", line 122, in execute
+    return super().execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/db/backends/utils.py", line 79, in execute
+    return self._execute_with_wrappers(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/db/backends/utils.py", line 92, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/db/backends/utils.py", line 100, in _execute
+    with self.db.wrap_database_errors:
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/db/utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/db/backends/sqlite3/base.py", line 354, in execute
+    return super().execute(query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+django.db.utils.OperationalError: no such table: chat_manual
+[pid: 1031|app: 0|req: 11/40] 45.227.180.158 () {42 vars in 863 bytes} [Tue Oct 22 09:05:47 2024] GET /chat/perguntar/?pergunta=Como%20emitir%20uma%20nota%20fiscal%3F => generated 117323 bytes in 35 msecs (HTTP/1.1 500) 7 headers in 243 bytes (2 switches on core 0)
+[pid: 1031|app: 0|req: 12/41] 45.227.180.158 () {46 vars in 922 bytes} [Tue Oct 22 09:06:00 2024] GET / => generated 2974 bytes in 0 msecs (HTTP/1.1 200) 6 headers in 208 bytes (2 switches on core 1)
+Internal Server Error: /admin/
+Traceback (most recent call last):
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/contrib/sessions/backends/base.py", line 244, in _get_session
+    return self._session_cache
+           ^^^^^^^^^^^^^^^^^^^
+AttributeError: 'SessionStore' object has no attribute '_session_cache'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/db/backends/sqlite3/base.py", line 354, in execute
+    return super().execute(query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: no such table: django_session
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/contrib/admin/sites.py", line 260, in wrapper
+    return self.admin_view(view, cacheable)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/utils/decorators.py", line 188, in _view_wrapper
+    result = _process_exception(request, e)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/utils/decorators.py", line 186, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/views/decorators/cache.py", line 80, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/contrib/admin/sites.py", line 229, in inner
+    if not self.has_permission(request):
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/contrib/admin/sites.py", line 202, in has_permission
+    return request.user.is_active and request.user.is_staff
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/utils/functional.py", line 251, in inner
+    self._setup()
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/utils/functional.py", line 404, in _setup
+    self._wrapped = self._setupfunc()
+                    ^^^^^^^^^^^^^^^^^
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/contrib/auth/middleware.py", line 37, in <lambda>
+    request.user = SimpleLazyObject(lambda: get_user(request))
+                                            ^^^^^^^^^^^^^^^^^
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/contrib/auth/middleware.py", line 17, in get_user
+    request._cached_user = auth.get_user(request)
+                           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/contrib/auth/__init__.py", line 209, in get_user
+    user_id = _get_user_session_key(request)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/contrib/auth/__init__.py", line 62, in _get_user_session_key
+    return get_user_model()._meta.pk.to_python(request.session[SESSION_KEY])
+                                               ~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/contrib/sessions/backends/base.py", line 55, in __getitem__
+    return self._session[key]
+           ^^^^^^^^^^^^^
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/contrib/sessions/backends/base.py", line 249, in _get_session
+    self._session_cache = self.load()
+                          ^^^^^^^^^^^
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/contrib/sessions/backends/db.py", line 55, in load
+    s = self._get_session_from_db()
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/contrib/sessions/backends/db.py", line 34, in _get_session_from_db
+    return self.model.objects.get(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/db/models/query.py", line 645, in get
+    num = len(clone)
+          ^^^^^^^^^^
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/db/models/query.py", line 382, in __len__
+    self._fetch_all()
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/db/models/query.py", line 1928, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/db/models/query.py", line 91, in __iter__
+    results = compiler.execute_sql(
+              ^^^^^^^^^^^^^^^^^^^^^
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/db/models/sql/compiler.py", line 1574, in execute_sql
+    cursor.execute(sql, params)
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/db/backends/utils.py", line 122, in execute
+    return super().execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/db/backends/utils.py", line 79, in execute
+    return self._execute_with_wrappers(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/db/backends/utils.py", line 92, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/db/backends/utils.py", line 100, in _execute
+    with self.db.wrap_database_errors:
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/db/utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/db/backends/sqlite3/base.py", line 354, in execute
+    return super().execute(query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+django.db.utils.OperationalError: no such table: django_session
+[pid: 1029|app: 0|req: 29/42] 45.227.180.158 () {46 vars in 934 bytes} [Tue Oct 22 09:06:02 2024] GET /admin/ => generated 196101 bytes in 65 msecs (HTTP/1.1 500) 7 headers in 243 bytes (2 switches on core 0)
+Internal Server Error: /admin/
+Traceback (most recent call last):
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/contrib/sessions/backends/base.py", line 244, in _get_session
+    return self._session_cache
+           ^^^^^^^^^^^^^^^^^^^
+AttributeError: 'SessionStore' object has no attribute '_session_cache'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/db/backends/sqlite3/base.py", line 354, in execute
+    return super().execute(query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: no such table: django_session
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/contrib/admin/sites.py", line 260, in wrapper
+    return self.admin_view(view, cacheable)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/utils/decorators.py", line 188, in _view_wrapper
+    result = _process_exception(request, e)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/utils/decorators.py", line 186, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/views/decorators/cache.py", line 80, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/contrib/admin/sites.py", line 229, in inner
+    if not self.has_permission(request):
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/contrib/admin/sites.py", line 202, in has_permission
+    return request.user.is_active and request.user.is_staff
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/utils/functional.py", line 251, in inner
+    self._setup()
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/utils/functional.py", line 404, in _setup
+    self._wrapped = self._setupfunc()
+                    ^^^^^^^^^^^^^^^^^
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/contrib/auth/middleware.py", line 37, in <lambda>
+    request.user = SimpleLazyObject(lambda: get_user(request))
+                                            ^^^^^^^^^^^^^^^^^
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/contrib/auth/middleware.py", line 17, in get_user
+    request._cached_user = auth.get_user(request)
+                           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/contrib/auth/__init__.py", line 209, in get_user
+    user_id = _get_user_session_key(request)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/contrib/auth/__init__.py", line 62, in _get_user_session_key
+    return get_user_model()._meta.pk.to_python(request.session[SESSION_KEY])
+                                               ~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/contrib/sessions/backends/base.py", line 55, in __getitem__
+    return self._session[key]
+           ^^^^^^^^^^^^^
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/contrib/sessions/backends/base.py", line 249, in _get_session
+    self._session_cache = self.load()
+                          ^^^^^^^^^^^
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/contrib/sessions/backends/db.py", line 55, in load
+    s = self._get_session_from_db()
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/contrib/sessions/backends/db.py", line 34, in _get_session_from_db
+    return self.model.objects.get(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/db/models/query.py", line 645, in get
+    num = len(clone)
+          ^^^^^^^^^^
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/db/models/query.py", line 382, in __len__
+    self._fetch_all()
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/db/models/query.py", line 1928, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/db/models/query.py", line 91, in __iter__
+    results = compiler.execute_sql(
+              ^^^^^^^^^^^^^^^^^^^^^
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/db/models/sql/compiler.py", line 1574, in execute_sql
+    cursor.execute(sql, params)
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/db/backends/utils.py", line 122, in execute
+    return super().execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/db/backends/utils.py", line 79, in execute
+    return self._execute_with_wrappers(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/db/backends/utils.py", line 92, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/db/backends/utils.py", line 100, in _execute
+    with self.db.wrap_database_errors:
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/db/utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/db/backends/sqlite3/base.py", line 354, in execute
+    return super().execute(query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+django.db.utils.OperationalError: no such table: django_session
+[pid: 1029|app: 0|req: 30/43] 45.227.180.158 () {42 vars in 872 bytes} [Tue Oct 22 09:06:02 2024] GET /admin/ => generated 195827 bytes in 53 msecs (HTTP/1.1 500) 7 headers in 243 bytes (2 switches on core 1)
+Internal Server Error: /admin/
+Traceback (most recent call last):
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/contrib/sessions/backends/base.py", line 244, in _get_session
+    return self._session_cache
+           ^^^^^^^^^^^^^^^^^^^
+AttributeError: 'SessionStore' object has no attribute '_session_cache'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/db/backends/sqlite3/base.py", line 354, in execute
+    return super().execute(query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: no such table: django_session
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/contrib/admin/sites.py", line 260, in wrapper
+    return self.admin_view(view, cacheable)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/utils/decorators.py", line 188, in _view_wrapper
+    result = _process_exception(request, e)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/utils/decorators.py", line 186, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/views/decorators/cache.py", line 80, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/contrib/admin/sites.py", line 229, in inner
+    if not self.has_permission(request):
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/contrib/admin/sites.py", line 202, in has_permission
+    return request.user.is_active and request.user.is_staff
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/utils/functional.py", line 251, in inner
+    self._setup()
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/utils/functional.py", line 404, in _setup
+    self._wrapped = self._setupfunc()
+                    ^^^^^^^^^^^^^^^^^
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/contrib/auth/middleware.py", line 37, in <lambda>
+    request.user = SimpleLazyObject(lambda: get_user(request))
+                                            ^^^^^^^^^^^^^^^^^
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/contrib/auth/middleware.py", line 17, in get_user
+    request._cached_user = auth.get_user(request)
+                           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/contrib/auth/__init__.py", line 209, in get_user
+    user_id = _get_user_session_key(request)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/contrib/auth/__init__.py", line 62, in _get_user_session_key
+    return get_user_model()._meta.pk.to_python(request.session[SESSION_KEY])
+                                               ~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/contrib/sessions/backends/base.py", line 55, in __getitem__
+    return self._session[key]
+           ^^^^^^^^^^^^^
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/contrib/sessions/backends/base.py", line 249, in _get_session
+    self._session_cache = self.load()
+                          ^^^^^^^^^^^
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/contrib/sessions/backends/db.py", line 55, in load
+    s = self._get_session_from_db()
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/contrib/sessions/backends/db.py", line 34, in _get_session_from_db
+    return self.model.objects.get(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/db/models/query.py", line 645, in get
+    num = len(clone)
+          ^^^^^^^^^^
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/db/models/query.py", line 382, in __len__
+    self._fetch_all()
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/db/models/query.py", line 1928, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/db/models/query.py", line 91, in __iter__
+    results = compiler.execute_sql(
+              ^^^^^^^^^^^^^^^^^^^^^
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/db/models/sql/compiler.py", line 1574, in execute_sql
+    cursor.execute(sql, params)
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/db/backends/utils.py", line 122, in execute
+    return super().execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/db/backends/utils.py", line 79, in execute
+    return self._execute_with_wrappers(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/db/backends/utils.py", line 92, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/db/backends/utils.py", line 100, in _execute
+    with self.db.wrap_database_errors:
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/db/utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/db/backends/sqlite3/base.py", line 354, in execute
+    return super().execute(query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+django.db.utils.OperationalError: no such table: django_session
+[pid: 1029|app: 0|req: 31/44] 45.227.180.158 () {46 vars in 934 bytes} [Tue Oct 22 09:06:13 2024] GET /admin/ => generated 196103 bytes in 53 msecs (HTTP/1.1 500) 7 headers in 243 bytes (2 switches on core 0)
+[pid: 1031|app: 0|req: 13/45] 45.227.180.158 () {46 vars in 922 bytes} [Tue Oct 22 09:06:14 2024] GET / => generated 2974 bytes in 0 msecs (HTTP/1.1 200) 6 headers in 208 bytes (2 switches on core 0)
+[pid: 1033|app: 0|req: 2/46] 45.227.180.158 () {44 vars in 910 bytes} [Tue Oct 22 09:06:16 2024] GET /chat/ => generated 11319 bytes in 1 msecs (HTTP/1.1 200) 6 headers in 209 bytes (2 switches on core 1)
+[pid: 1031|app: 0|req: 14/47] 45.227.180.158 () {46 vars in 941 bytes} [Tue Oct 22 09:08:03 2024] GET /chat/ => generated 9778 bytes in 2 msecs (HTTP/1.1 200) 6 headers in 208 bytes (2 switches on core 0)
+Internal Server Error: /admin/
+Traceback (most recent call last):
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/contrib/sessions/backends/base.py", line 244, in _get_session
+    return self._session_cache
+           ^^^^^^^^^^^^^^^^^^^
+AttributeError: 'SessionStore' object has no attribute '_session_cache'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/db/backends/sqlite3/base.py", line 354, in execute
+    return super().execute(query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: no such table: django_session
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/contrib/admin/sites.py", line 260, in wrapper
+    return self.admin_view(view, cacheable)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/utils/decorators.py", line 188, in _view_wrapper
+    result = _process_exception(request, e)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/utils/decorators.py", line 186, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/views/decorators/cache.py", line 80, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/contrib/admin/sites.py", line 229, in inner
+    if not self.has_permission(request):
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/contrib/admin/sites.py", line 202, in has_permission
+    return request.user.is_active and request.user.is_staff
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/utils/functional.py", line 251, in inner
+    self._setup()
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/utils/functional.py", line 404, in _setup
+    self._wrapped = self._setupfunc()
+                    ^^^^^^^^^^^^^^^^^
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/contrib/auth/middleware.py", line 37, in <lambda>
+    request.user = SimpleLazyObject(lambda: get_user(request))
+                                            ^^^^^^^^^^^^^^^^^
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/contrib/auth/middleware.py", line 17, in get_user
+    request._cached_user = auth.get_user(request)
+                           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/contrib/auth/__init__.py", line 209, in get_user
+    user_id = _get_user_session_key(request)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/contrib/auth/__init__.py", line 62, in _get_user_session_key
+    return get_user_model()._meta.pk.to_python(request.session[SESSION_KEY])
+                                               ~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/contrib/sessions/backends/base.py", line 55, in __getitem__
+    return self._session[key]
+           ^^^^^^^^^^^^^
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/contrib/sessions/backends/base.py", line 249, in _get_session
+    self._session_cache = self.load()
+                          ^^^^^^^^^^^
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/contrib/sessions/backends/db.py", line 55, in load
+    s = self._get_session_from_db()
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/contrib/sessions/backends/db.py", line 34, in _get_session_from_db
+    return self.model.objects.get(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/db/models/query.py", line 645, in get
+    num = len(clone)
+          ^^^^^^^^^^
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/db/models/query.py", line 382, in __len__
+    self._fetch_all()
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/db/models/query.py", line 1928, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/db/models/query.py", line 91, in __iter__
+    results = compiler.execute_sql(
+              ^^^^^^^^^^^^^^^^^^^^^
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/db/models/sql/compiler.py", line 1574, in execute_sql
+    cursor.execute(sql, params)
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/db/backends/utils.py", line 122, in execute
+    return super().execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/db/backends/utils.py", line 79, in execute
+    return self._execute_with_wrappers(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/db/backends/utils.py", line 92, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/db/backends/utils.py", line 100, in _execute
+    with self.db.wrap_database_errors:
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/db/utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/db/backends/sqlite3/base.py", line 354, in execute
+    return super().execute(query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+django.db.utils.OperationalError: no such table: django_session
+[pid: 1029|app: 0|req: 32/48] 45.227.180.158 () {46 vars in 934 bytes} [Tue Oct 22 09:08:05 2024] GET /admin/ => generated 196101 bytes in 53 msecs (HTTP/1.1 500) 7 headers in 243 bytes (2 switches on core 1)
+Internal Server Error: /admin/
+Traceback (most recent call last):
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/contrib/sessions/backends/base.py", line 244, in _get_session
+    return self._session_cache
+           ^^^^^^^^^^^^^^^^^^^
+AttributeError: 'SessionStore' object has no attribute '_session_cache'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/db/backends/sqlite3/base.py", line 354, in execute
+    return super().execute(query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: no such table: django_session
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/contrib/admin/sites.py", line 260, in wrapper
+    return self.admin_view(view, cacheable)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/utils/decorators.py", line 188, in _view_wrapper
+    result = _process_exception(request, e)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/utils/decorators.py", line 186, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/views/decorators/cache.py", line 80, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/contrib/admin/sites.py", line 229, in inner
+    if not self.has_permission(request):
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/contrib/admin/sites.py", line 202, in has_permission
+    return request.user.is_active and request.user.is_staff
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/utils/functional.py", line 251, in inner
+    self._setup()
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/utils/functional.py", line 404, in _setup
+    self._wrapped = self._setupfunc()
+                    ^^^^^^^^^^^^^^^^^
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/contrib/auth/middleware.py", line 37, in <lambda>
+    request.user = SimpleLazyObject(lambda: get_user(request))
+                                            ^^^^^^^^^^^^^^^^^
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/contrib/auth/middleware.py", line 17, in get_user
+    request._cached_user = auth.get_user(request)
+                           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/contrib/auth/__init__.py", line 209, in get_user
+    user_id = _get_user_session_key(request)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/contrib/auth/__init__.py", line 62, in _get_user_session_key
+    return get_user_model()._meta.pk.to_python(request.session[SESSION_KEY])
+                                               ~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/contrib/sessions/backends/base.py", line 55, in __getitem__
+    return self._session[key]
+           ^^^^^^^^^^^^^
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/contrib/sessions/backends/base.py", line 249, in _get_session
+    self._session_cache = self.load()
+                          ^^^^^^^^^^^
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/contrib/sessions/backends/db.py", line 55, in load
+    s = self._get_session_from_db()
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/contrib/sessions/backends/db.py", line 34, in _get_session_from_db
+    return self.model.objects.get(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/db/models/query.py", line 645, in get
+    num = len(clone)
+          ^^^^^^^^^^
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/db/models/query.py", line 382, in __len__
+    self._fetch_all()
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/db/models/query.py", line 1928, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/db/models/query.py", line 91, in __iter__
+    results = compiler.execute_sql(
+              ^^^^^^^^^^^^^^^^^^^^^
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/db/models/sql/compiler.py", line 1574, in execute_sql
+    cursor.execute(sql, params)
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/db/backends/utils.py", line 122, in execute
+    return super().execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/db/backends/utils.py", line 79, in execute
+    return self._execute_with_wrappers(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/db/backends/utils.py", line 92, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/db/backends/utils.py", line 100, in _execute
+    with self.db.wrap_database_errors:
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/db/utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/db/backends/sqlite3/base.py", line 354, in execute
+    return super().execute(query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+django.db.utils.OperationalError: no such table: django_session
+[pid: 1029|app: 0|req: 33/49] 45.227.180.158 () {42 vars in 872 bytes} [Tue Oct 22 09:08:07 2024] GET /admin/ => generated 195827 bytes in 52 msecs (HTTP/1.1 500) 7 headers in 243 bytes (2 switches on core 0)
+[pid: 1031|app: 0|req: 15/50] 45.227.180.158 () {46 vars in 941 bytes} [Tue Oct 22 09:08:27 2024] GET /chat/ => generated 9778 bytes in 0 msecs (HTTP/1.1 200) 6 headers in 208 bytes (2 switches on core 1)
+[pid: 1029|app: 0|req: 34/51] 45.227.180.158 () {46 vars in 934 bytes} [Tue Oct 22 09:08:29 2024] GET /admin/ => generated 0 bytes in 2 msecs (HTTP/1.1 302) 11 headers in 471 bytes (2 switches on core 1)
+[pid: 1029|app: 0|req: 35/52] 45.227.180.158 () {46 vars in 927 bytes} [Tue Oct 22 09:08:29 2024] GET /admin/login/?next=/admin/ => generated 4196 bytes in 17 msecs (HTTP/1.1 200) 10 headers in 470 bytes (2 switches on core 0)
+[pid: 1029|app: 0|req: 36/53] 45.227.180.158 () {52 vars in 1116 bytes} [Tue Oct 22 09:08:32 2024] POST /admin/login/?next=/admin/ => generated 4382 bytes in 711 msecs (HTTP/1.1 200) 10 headers in 470 bytes (2 switches on core 1)
+[pid: 1031|app: 0|req: 16/54] 45.227.180.158 () {52 vars in 1116 bytes} [Tue Oct 22 09:10:42 2024] POST /admin/login/?next=/admin/ => generated 0 bytes in 702 msecs (HTTP/1.1 302) 12 headers in 634 bytes (2 switches on core 0)
+[pid: 1031|app: 0|req: 17/55] 45.227.180.158 () {46 vars in 968 bytes} [Tue Oct 22 09:10:43 2024] GET /admin/ => generated 6736 bytes in 9 msecs (HTTP/1.1 200) 10 headers in 470 bytes (2 switches on core 1)
+[pid: 1029|app: 0|req: 37/56] 45.227.180.158 () {44 vars in 942 bytes} [Tue Oct 22 09:10:45 2024] GET /admin/chat/manual/ => generated 7886 bytes in 12 msecs (HTTP/1.1 200) 10 headers in 470 bytes (2 switches on core 0)
+[pid: 1029|app: 0|req: 38/57] 45.227.180.158 () {42 vars in 777 bytes} [Tue Oct 22 09:10:45 2024] GET /admin/jsi18n/ => generated 8959 bytes in 5 msecs (HTTP/1.1 200) 7 headers in 230 bytes (2 switches on core 1)
+[pid: 1029|app: 0|req: 39/58] 45.227.180.158 () {44 vars in 962 bytes} [Tue Oct 22 09:11:05 2024] GET /admin/chat/manual/add/ => generated 10592 bytes in 12 msecs (HTTP/1.1 200) 10 headers in 471 bytes (2 switches on core 0)
+[pid: 1029|app: 0|req: 40/59] 45.227.180.158 () {42 vars in 781 bytes} [Tue Oct 22 09:11:05 2024] GET /admin/jsi18n/ => generated 8959 bytes in 4 msecs (HTTP/1.1 200) 7 headers in 230 bytes (2 switches on core 1)
+[pid: 1029|app: 0|req: 41/60] 45.227.180.158 () {46 vars in 993 bytes} [Tue Oct 22 09:22:42 2024] GET /admin/chat/manual/add/ => generated 10592 bytes in 12 msecs (HTTP/1.1 200) 10 headers in 471 bytes (2 switches on core 0)
+[pid: 1031|app: 0|req: 18/61] 45.227.180.158 () {42 vars in 781 bytes} [Tue Oct 22 09:22:43 2024] GET /admin/jsi18n/ => generated 8959 bytes in 3 msecs (HTTP/1.1 200) 7 headers in 230 bytes (2 switches on core 0)
+[pid: 1029|app: 0|req: 42/62] 45.227.180.158 () {44 vars in 944 bytes} [Tue Oct 22 09:22:56 2024] GET /admin/chat/ => generated 5248 bytes in 8 msecs (HTTP/1.1 200) 10 headers in 470 bytes (2 switches on core 1)
+[pid: 1031|app: 0|req: 19/63] 45.227.180.158 () {44 vars in 947 bytes} [Tue Oct 22 09:22:57 2024] GET /admin/chat/manual/ => generated 7886 bytes in 22 msecs (HTTP/1.1 200) 10 headers in 470 bytes (2 switches on core 1)
+[pid: 1029|app: 0|req: 43/64] 45.227.180.158 () {42 vars in 777 bytes} [Tue Oct 22 09:22:58 2024] GET /admin/jsi18n/ => generated 8959 bytes in 4 msecs (HTTP/1.1 200) 7 headers in 230 bytes (2 switches on core 0)
+[pid: 1031|app: 0|req: 20/65] 45.227.180.158 () {44 vars in 962 bytes} [Tue Oct 22 09:23:00 2024] GET /admin/chat/manual/add/ => generated 10592 bytes in 13 msecs (HTTP/1.1 200) 10 headers in 471 bytes (2 switches on core 0)
+[pid: 1029|app: 0|req: 44/66] 45.227.180.158 () {42 vars in 781 bytes} [Tue Oct 22 09:23:00 2024] GET /admin/jsi18n/ => generated 8959 bytes in 4 msecs (HTTP/1.1 200) 7 headers in 230 bytes (2 switches on core 1)
+[pid: 1031|app: 0|req: 21/67] 45.227.180.158 () {42 vars in 860 bytes} [Tue Oct 22 09:23:16 2024] GET / => generated 2974 bytes in 0 msecs (HTTP/1.1 200) 6 headers in 208 bytes (2 switches on core 1)
+[pid: 1029|app: 0|req: 45/68] 45.227.180.158 () {44 vars in 910 bytes} [Tue Oct 22 09:23:18 2024] GET /chat/ => generated 9778 bytes in 0 msecs (HTTP/1.1 200) 6 headers in 208 bytes (2 switches on core 0)
+Internal Server Error: /chat/perguntar/
+Traceback (most recent call last):
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/var/www/SPART/chat/views.py", line 19, in perguntar
+    imagens = {
+               ^
+  File "/var/www/SPART/chat/qa.py", line 41, in responder_pergunta
+    vectorizer = TfidfVectorizer()
+                          ^^^^^^^^^
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/numpy/core/fromnumeric.py", line 1229, in argmax
+    return _wrapfunc(a, 'argmax', axis=axis, out=out, **kwds)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/numpy/core/fromnumeric.py", line 59, in _wrapfunc
+    return bound(*args, **kwds)
+           ^^^^^^^^^^^^^^^^^^^^
+ValueError: attempt to get argmax of an empty sequence
+[pid: 1031|app: 0|req: 22/69] 45.227.180.158 () {42 vars in 863 bytes} [Tue Oct 22 09:23:20 2024] GET /chat/perguntar/?pergunta=Como%20emitir%20uma%20nota%20fiscal%3F => generated 69458 bytes in 32 msecs (HTTP/1.1 500) 7 headers in 242 bytes (2 switches on core 0)
+[pid: 1031|app: 0|req: 23/70] 45.227.180.158 () {46 vars in 941 bytes} [Tue Oct 22 09:23:23 2024] GET /chat/ => generated 9778 bytes in 0 msecs (HTTP/1.1 200) 6 headers in 208 bytes (2 switches on core 1)
+[pid: 1029|app: 0|req: 46/71] 45.227.180.158 () {46 vars in 941 bytes} [Tue Oct 22 09:23:24 2024] GET /chat/ => generated 9778 bytes in 0 msecs (HTTP/1.1 200) 6 headers in 208 bytes (2 switches on core 1)
+[pid: 1031|app: 0|req: 24/72] 45.227.180.158 () {46 vars in 941 bytes} [Tue Oct 22 09:23:24 2024] GET /chat/ => generated 9778 bytes in 0 msecs (HTTP/1.1 200) 6 headers in 208 bytes (2 switches on core 0)
+[pid: 1033|app: 0|req: 3/73] 45.227.180.158 () {46 vars in 941 bytes} [Tue Oct 22 09:23:25 2024] GET /chat/ => generated 11319 bytes in 1 msecs (HTTP/1.1 200) 6 headers in 209 bytes (2 switches on core 0)
+[pid: 1031|app: 0|req: 25/74] 45.227.180.158 () {46 vars in 941 bytes} [Tue Oct 22 09:23:25 2024] GET /chat/ => generated 9778 bytes in 0 msecs (HTTP/1.1 200) 6 headers in 208 bytes (2 switches on core 1)
+[pid: 1029|app: 0|req: 47/75] 45.227.180.158 () {46 vars in 941 bytes} [Tue Oct 22 09:23:25 2024] GET /chat/ => generated 9778 bytes in 1 msecs (HTTP/1.1 200) 6 headers in 208 bytes (2 switches on core 1)
+[pid: 1029|app: 0|req: 48/76] 45.227.180.158 () {46 vars in 941 bytes} [Tue Oct 22 09:23:26 2024] GET /chat/ => generated 9778 bytes in 0 msecs (HTTP/1.1 200) 6 headers in 208 bytes (2 switches on core 0)
+[pid: 1029|app: 0|req: 49/77] 45.227.180.158 () {46 vars in 941 bytes} [Tue Oct 22 09:23:27 2024] GET /chat/ => generated 9778 bytes in 0 msecs (HTTP/1.1 200) 6 headers in 208 bytes (2 switches on core 1)
+[pid: 1031|app: 0|req: 26/78] 45.227.180.158 () {42 vars in 870 bytes} [Tue Oct 22 09:23:33 2024] GET /chat/ => generated 9778 bytes in 0 msecs (HTTP/1.1 200) 6 headers in 208 bytes (2 switches on core 0)
+[pid: 1033|app: 0|req: 4/79] 45.227.180.158 () {46 vars in 922 bytes} [Tue Oct 22 09:23:39 2024] GET / => generated 2974 bytes in 2 msecs (HTTP/1.1 200) 6 headers in 208 bytes (2 switches on core 1)
+[pid: 1035|app: 0|req: 1/80] 45.227.180.158 () {44 vars in 900 bytes} [Tue Oct 22 09:23:42 2024] GET / => generated 2974 bytes in 257 msecs (HTTP/1.1 200) 6 headers in 208 bytes (2 switches on core 0)
+[pid: 1029|app: 0|req: 50/81] 45.227.180.158 () {44 vars in 910 bytes} [Tue Oct 22 09:23:43 2024] GET /chat/ => generated 9778 bytes in 1 msecs (HTTP/1.1 200) 6 headers in 208 bytes (2 switches on core 1)
+[pid: 1029|app: 0|req: 51/82] 45.227.180.158 () {46 vars in 941 bytes} [Tue Oct 22 09:23:49 2024] GET /chat/ => generated 9778 bytes in 0 msecs (HTTP/1.1 200) 6 headers in 208 bytes (2 switches on core 0)
+[pid: 1031|app: 0|req: 27/83] 45.227.180.158 () {46 vars in 941 bytes} [Tue Oct 22 09:27:48 2024] GET /chat/ => generated 9778 bytes in 0 msecs (HTTP/1.1 200) 6 headers in 208 bytes (2 switches on core 0)
+[pid: 1029|app: 0|req: 52/84] 45.227.180.158 () {46 vars in 941 bytes} [Tue Oct 22 09:29:55 2024] GET /chat/ => generated 9778 bytes in 1 msecs (HTTP/1.1 200) 6 headers in 208 bytes (2 switches on core 1)
+[pid: 1029|app: 0|req: 53/85] 45.227.180.158 () {44 vars in 905 bytes} [Tue Oct 22 09:29:57 2024] GET / => generated 2974 bytes in 0 msecs (HTTP/1.1 200) 6 headers in 208 bytes (2 switches on core 0)
+[pid: 1029|app: 0|req: 54/86] 45.227.180.158 () {44 vars in 900 bytes} [Tue Oct 22 09:29:58 2024] GET / => generated 2974 bytes in 0 msecs (HTTP/1.1 200) 6 headers in 208 bytes (2 switches on core 1)
+[pid: 1029|app: 0|req: 55/87] 45.227.180.158 () {44 vars in 910 bytes} [Tue Oct 22 09:30:00 2024] GET /chat/ => generated 9778 bytes in 1 msecs (HTTP/1.1 200) 6 headers in 208 bytes (2 switches on core 0)
+[pid: 1029|app: 0|req: 56/88] 45.227.180.158 () {40 vars in 795 bytes} [Tue Oct 22 09:30:25 2024] GET /chat/ => generated 9778 bytes in 0 msecs (HTTP/1.1 200) 6 headers in 208 bytes (2 switches on core 1)
+Not Found: /favicon.ico
+[pid: 1031|app: 0|req: 28/89] 45.227.180.158 () {40 vars in 746 bytes} [Tue Oct 22 09:30:26 2024] GET /favicon.ico => generated 2682 bytes in 4 msecs (HTTP/1.1 404) 6 headers in 215 bytes (2 switches on core 1)
+[pid: 1033|app: 0|req: 5/90] 45.227.180.158 () {42 vars in 830 bytes} [Tue Oct 22 09:30:32 2024] GET / => generated 2974 bytes in 0 msecs (HTTP/1.1 200) 6 headers in 208 bytes (2 switches on core 0)
+[pid: 1029|app: 0|req: 57/91] 45.227.180.158 () {42 vars in 835 bytes} [Tue Oct 22 09:30:33 2024] GET /chat/ => generated 9778 bytes in 0 msecs (HTTP/1.1 200) 6 headers in 208 bytes (2 switches on core 1)
+[pid: 1031|app: 0|req: 29/92] 45.227.180.158 () {46 vars in 922 bytes} [Tue Oct 22 09:31:43 2024] GET / => generated 2974 bytes in 0 msecs (HTTP/1.1 200) 6 headers in 208 bytes (2 switches on core 0)
+[pid: 1029|app: 0|req: 58/93] 45.227.180.158 () {42 vars in 872 bytes} [Tue Oct 22 09:32:48 2024] GET /admin/ => generated 6736 bytes in 12 msecs (HTTP/1.1 200) 10 headers in 470 bytes (2 switches on core 0)
+[pid: 1031|app: 0|req: 30/94] 45.227.180.158 () {44 vars in 942 bytes} [Tue Oct 22 09:32:50 2024] GET /admin/chat/manual/ => generated 7886 bytes in 11 msecs (HTTP/1.1 200) 10 headers in 470 bytes (2 switches on core 1)
+[pid: 1029|app: 0|req: 59/95] 45.227.180.158 () {42 vars in 777 bytes} [Tue Oct 22 09:32:51 2024] GET /admin/jsi18n/ => generated 8959 bytes in 6 msecs (HTTP/1.1 200) 7 headers in 230 bytes (2 switches on core 1)
+[pid: 1029|app: 0|req: 60/96] 45.227.180.158 () {44 vars in 962 bytes} [Tue Oct 22 09:32:52 2024] GET /admin/chat/manual/add/ => generated 10592 bytes in 13 msecs (HTTP/1.1 200) 10 headers in 471 bytes (2 switches on core 0)
+[pid: 1029|app: 0|req: 61/97] 45.227.180.158 () {42 vars in 781 bytes} [Tue Oct 22 09:32:53 2024] GET /admin/jsi18n/ => generated 8959 bytes in 3 msecs (HTTP/1.1 200) 7 headers in 230 bytes (2 switches on core 1)
+[pid: 1029|app: 0|req: 62/98] 45.227.180.158 () {44 vars in 934 bytes} [Tue Oct 22 09:32:56 2024] GET /admin/ => generated 6736 bytes in 9 msecs (HTTP/1.1 200) 10 headers in 470 bytes (2 switches on core 0)
+[pid: 1031|app: 0|req: 31/99] 45.227.180.158 () {44 vars in 918 bytes} [Tue Oct 22 09:32:58 2024] GET /admin/ => generated 6736 bytes in 9 msecs (HTTP/1.1 200) 10 headers in 470 bytes (2 switches on core 0)
+[pid: 1029|app: 0|req: 63/100] 45.227.180.158 () {42 vars in 860 bytes} [Tue Oct 22 09:36:24 2024] GET / => generated 2974 bytes in 0 msecs (HTTP/1.1 200) 6 headers in 208 bytes (2 switches on core 1)
+[pid: 1029|app: 0|req: 64/101] 45.227.180.158 () {44 vars in 910 bytes} [Tue Oct 22 09:36:25 2024] GET /chat/ => generated 9778 bytes in 0 msecs (HTTP/1.1 200) 6 headers in 208 bytes (2 switches on core 0)
+[pid: 1031|app: 0|req: 32/102] 45.227.180.158 () {42 vars in 872 bytes} [Tue Oct 22 09:37:34 2024] GET /admin/ => generated 6736 bytes in 9 msecs (HTTP/1.1 200) 10 headers in 470 bytes (2 switches on core 1)
+[pid: 1029|app: 0|req: 65/103] 127.0.0.1 () {32 vars in 359 bytes} [Tue Oct 22 09:42:26 2024] GET / => generated 2974 bytes in 1 msecs (HTTP/1.1 200) 6 headers in 208 bytes (2 switches on core 0)
+[pid: 1029|app: 0|req: 66/104] 45.227.180.158 () {44 vars in 903 bytes} [Tue Oct 22 09:42:45 2024] GET /admin/ => generated 6736 bytes in 8 msecs (HTTP/1.1 200) 10 headers in 470 bytes (2 switches on core 1)
+[pid: 1029|app: 0|req: 67/105] 45.227.180.158 () {44 vars in 928 bytes} [Tue Oct 22 09:42:48 2024] GET /admin/chat/ => generated 5248 bytes in 7 msecs (HTTP/1.1 200) 10 headers in 470 bytes (2 switches on core 0)
+[pid: 1031|app: 0|req: 33/106] 45.227.180.158 () {44 vars in 933 bytes} [Tue Oct 22 09:42:50 2024] GET /admin/chat/ => generated 5248 bytes in 8 msecs (HTTP/1.1 200) 10 headers in 470 bytes (2 switches on core 0)
+[pid: 1029|app: 0|req: 68/107] 45.227.180.158 () {44 vars in 947 bytes} [Tue Oct 22 09:42:50 2024] GET /admin/chat/manual/ => generated 7886 bytes in 9 msecs (HTTP/1.1 200) 10 headers in 470 bytes (2 switches on core 1)
+[pid: 1029|app: 0|req: 69/108] 45.227.180.158 () {42 vars in 777 bytes} [Tue Oct 22 09:42:50 2024] GET /admin/jsi18n/ => generated 8959 bytes in 6 msecs (HTTP/1.1 200) 7 headers in 230 bytes (2 switches on core 0)
+[pid: 1029|app: 0|req: 70/109] 45.227.180.158 () {40 vars in 759 bytes} [Tue Oct 22 09:44:07 2024] GET / => generated 2974 bytes in 0 msecs (HTTP/1.1 200) 6 headers in 208 bytes (2 switches on core 1)
+Not Found: /favicon.ico
+[pid: 1029|app: 0|req: 71/110] 45.227.180.158 () {40 vars in 715 bytes} [Tue Oct 22 09:44:07 2024] GET /favicon.ico => generated 2682 bytes in 4 msecs (HTTP/1.1 404) 6 headers in 215 bytes (2 switches on core 0)
+[pid: 1029|app: 0|req: 72/111] 45.227.180.158 () {42 vars in 809 bytes} [Tue Oct 22 09:44:08 2024] GET /chat/ => generated 9778 bytes in 0 msecs (HTTP/1.1 200) 6 headers in 208 bytes (2 switches on core 1)
+Internal Server Error: /chat/perguntar/
+Traceback (most recent call last):
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/var/www/SPART/chat/views.py", line 19, in perguntar
+    imagens = {
+               ^
+  File "/var/www/SPART/chat/qa.py", line 41, in responder_pergunta
+    vectorizer = TfidfVectorizer()
+                          ^^^^^^^^^
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/numpy/core/fromnumeric.py", line 1229, in argmax
+    return _wrapfunc(a, 'argmax', axis=axis, out=out, **kwds)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/var/www/SPART/venv/lib/python3.12/site-packages/numpy/core/fromnumeric.py", line 59, in _wrapfunc
+    return bound(*args, **kwds)
+           ^^^^^^^^^^^^^^^^^^^^
+ValueError: attempt to get argmax of an empty sequence
+[pid: 1029|app: 0|req: 73/112] 45.227.180.158 () {40 vars in 762 bytes} [Tue Oct 22 09:44:15 2024] GET /chat/perguntar/?pergunta=Como%20emitir%20uma%20nota%20fiscal%3F => generated 68694 bytes in 35 msecs (HTTP/1.1 500) 7 headers in 242 bytes (2 switches on core 0)
