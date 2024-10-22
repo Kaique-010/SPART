@@ -15,12 +15,21 @@ def perguntar(request):
     if not pergunta:
         return JsonResponse({'error': 'Por favor, insira uma pergunta.'}, status=400)
 
-    manuais = list(Manual.objects.all())  
-    resposta = responder_pergunta(pergunta, manuais)  
+    manuais = list(Manual.objects.all())
+    imagens = {
+        manual.id: [imagem.imagem.url for imagem in manual.imagens.all()]
+        for manual in manuais
+    }
+
+    resposta = responder_pergunta(pergunta, manuais, imagens)
     return JsonResponse(resposta)
+
+
 
 def home(request):
     return render(request, 'home.html')
+
+
 
 def chat(request):
     sugerir_perguntas = [

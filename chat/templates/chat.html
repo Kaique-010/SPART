@@ -61,7 +61,7 @@
         color: burlywood;
     }
 
-    /* body */
+    /* Body */
     body {
         padding-bottom: 60px;
         background-color: #121212;
@@ -134,6 +134,18 @@
         padding: 15px;
         background-color: #1c1c1c;
     }
+
+    .imagem-wrapper {
+        width: 100% !important;
+        margin: 25px 0 !important;
+        text-align: center !important;
+    }
+
+    .imagem-wrapper img {
+        max-width: 100% !important;
+        height: auto !important;
+        text-align: center;
+    }
 </style>
 
 <div class="card" id="chat-card">
@@ -150,18 +162,33 @@
         <button class="custom-btn danger" id="pararBtn" onclick="pararEscrita()" disabled>
             <i class="fas fa-stop"></i> Parar
         </button>
+        <button class="custom-btn success" onclick="lerTexto()">
+            <i class="fas fa-volume-up"></i> Ouvir Resposta
+        </button>
     </div>
     <br>
+
     <div class="card-resposta">
         <div id="resposta" class="mt-3"></div>
         <img src='/static/capacete.png' style="height: 20px; width: 22px;" />
         <span id="resposta-texto"></span>
+        {{ manual.conteudo|safe }}
+        {% if manual.imagem %}
+        <img src="{{ manual.imagem.url }}" alt="Imagem do Manual" style="max-width: 100%; height: auto;">
+        {% endif %}
     </div>
+</div>
+
+<div id="imageModal" class="modal" onclick="closeModal()">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <img class="modal-content" id="modalImage">
 </div>
 
 <script>
     let respostaCompleta = "";
     let typingInterval;
+    let isTyping = false;  // Controle para efeito de digitação
+    let synth = window.speechSynthesis;
 
     async function enviarPergunta() {
         const pergunta = document.getElementById("pergunta").value;
@@ -175,53 +202,83 @@
             }
             const data = await response.json();
             respostaCompleta = data.resposta || "Desculpe, não consegui responder.";
-            escreverResposta(respostaCompleta, 0.08);
+
+            escreverRespostaComEfeito(respostaCompleta, data.imagens);
         } catch (error) {
             document.getElementById("resposta").innerText = "Erro ao enviar a pergunta: " + error.message;
         }
     }
 
-    // Função para gerar a resposta com efeito de digitação
-    function escreverResposta(resposta, intervalo) {
+    function escreverRespostaComEfeito(resposta, imagens, links) {
         const respostaDiv = document.getElementById("resposta");
         respostaDiv.innerHTML = ""; // Limpa a resposta anterior
-        let index = 0; // Índice para percorrer a resposta
+        let index = 0;
+        isTyping = true;
 
         typingInterval = setInterval(() => {
             if (index < resposta.length) {
-                respostaDiv.innerHTML += resposta.charAt(index);
+                const char = resposta.charAt(index);
+                respostaDiv.innerHTML += char === '\n' ? "<br>" : char;
                 index++;
             } else {
-                clearInterval(typingInterval); // Limpa o intervalo após a escrita
-                document.getElementById("pararBtn").disabled = false; // Habilita o botão Parar
-
-                // Chama a função de formatação após a escrita completa
-                formatarResposta();
+                finalizarDigitacao(resposta, imagens, links); // Passa também os links
             }
-        }, intervalo); // O intervalo define a velocidade da digitação
+        }, 3); // Velocidade da digitação
+
+        document.getElementById("pararBtn").disabled = false;
     }
 
-    // Função para formatar a resposta
-    function formatarResposta() {
+    function finalizarDigitacao(resposta, imagens, links) {
+        clearInterval(typingInterval);
+        isTyping = false;
+        document.getElementById("pararBtn").disabled = true;
+        aplicarFormatacaoCompleta(resposta, imagens, links);
+    }
+
+    function aplicarFormatacaoCompleta(resposta, imagens, links) {
         const respostaDiv = document.getElementById("resposta");
-        respostaDiv.innerHTML = respostaCompleta.replace(/\n/g, "<br>"); // Formata a resposta com quebras de linha
+        respostaDiv.innerHTML = resposta; // Insere o HTML completo
+
+        if (imagens && imagens.length > 0) {
+            const galeria = document.createElement('div');
+            galeria.className = "image-gallery"; // Classe para layout das imagens
+
+            imagens.forEach((imagem, index) => {
+                const linkElement = document.createElement('a');
+                linkElement.href = "#"; // Não abre em nova aba
+                linkElement.style.margin = "5px"; // Estilo opcional
+
+                const imgElement = document.createElement('img');
+                imgElement.src = imagem;
+                imgElement.alt = "Imagem " + (index + 1);
+                imgElement.style.maxWidth = "100%"; // Ajusta largura
+                imgElement.style.height = "auto"; // Mantém proporção
+
+                linkElement.appendChild(imgElement);
+                galeria.appendChild(linkElement);
+            });
+
+            respostaDiv.appendChild(galeria); // Adiciona galeria de imagens
+        }
     }
 
-    // Função para parar a escrita
+
     function pararEscrita() {
-        clearInterval(typingInterval); // Limpa o intervalo do efeito de digitação
-        const respostaDiv = document.getElementById("resposta");
-        respostaDiv.innerHTML = respostaCompleta; // Exibe a resposta completa
-        formatarResposta(); // Chama a função para formatar a resposta
-        document.getElementById("pararBtn").disabled = true; // Desabilita o botão Parar
+        if (isTyping) {
+            clearInterval(typingInterval);
+            document.getElementById("resposta").innerHTML = respostaCompleta; // Exibe resposta completa
+            isTyping = false;
+        }
     }
 
-    // Evento do botão de envio
-    document.getElementById('gerarResposta').addEventListener('click', enviarPergunta);
-
-    // Evento do botão Parar
-    document.getElementById('pararBtn').addEventListener('click', pararEscrita);
-
+    function lerTexto() {
+        if (synth.speaking) {
+            synth.cancel(); // Para a leitura atual
+        } else {
+            const utterance = new SpeechSynthesisUtterance(respostaCompleta);
+            synth.speak(utterance); // Inicia a leitura da resposta
+        }
+    }
 </script>
 
 <footer>
@@ -238,5 +295,4 @@
         </ul>
     </div>
 </footer>
-
 {% endblock %}

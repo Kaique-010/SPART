@@ -4,6 +4,9 @@ from sklearn.metrics.pairwise import cosine_similarity  # type: ignore
 from gensim.models import Word2Vec  # type: ignore
 import numpy as np  # type: ignore
 from sklearn.feature_extraction.text import TfidfVectorizer  # type: ignore
+import os
+
+
 
 def extrair_links_manuais(url):
     headers = {
@@ -17,6 +20,8 @@ def extrair_links_manuais(url):
     soup = BeautifulSoup(response.text, 'html.parser')
     links = [link['href'] for link in soup.find_all('a', href=True)]
     return links
+
+
 
 def extrair_conteudo(link):
     headers = {
@@ -32,6 +37,8 @@ def extrair_conteudo(link):
         print(f"Erro ao acessar o link {link}: {e}")
         return None
 
+
+
 def gerar_palavras_chave(texto):
     stop_words = ['e', 'a', 'o', 'que', 'de', 'do', 'da', 'em', 'para', 'com', 'um', 'uma', 'os', 'as', 'na', 'no']
     
@@ -44,6 +51,8 @@ def gerar_palavras_chave(texto):
     palavras_chave = feature_array[tfidf_sorting][:10]  
     return ', '.join(palavras_chave)
 
+
+
 def treinar_modelo_word2vec(sentencas):
     """
     Treina um modelo Word2Vec com uma lista de sentenças.
@@ -53,3 +62,5 @@ def treinar_modelo_word2vec(sentencas):
     """
     modelo = Word2Vec(sentencas, vector_size=100, window=5, min_count=1, workers=4)
     return modelo
+
+
