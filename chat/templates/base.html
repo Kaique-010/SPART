@@ -18,17 +18,28 @@
             background: linear-gradient(to right, #041325, #635c51);
         }
 
+        .nav-item {
+            margin: 0 10px;
+            /* Espaçamento entre os itens */
+        }
+
         .nav-link {
             color: #ffffff;
+            /* Cor do texto padrão */
+            transition: color 0.3s;
+            /* Transição suave para hover */
         }
 
         .nav-link:hover {
             color: #ffcc00;
+            /* Cor ao passar o mouse */
             text-decoration: underline;
+            /* Sublinhado ao passar o mouse */
         }
 
         .nav-link.active {
             color: #ffcc00;
+            /* Cor para o link ativo */
         }
 
         .fixed-nav {
@@ -43,48 +54,46 @@
 
         .fixed-nav .nav-link {
             color: red;
+            /* Cor do link fixo */
         }
 
         .fixed-nav .nav-link:hover {
             color: #ff4d4d;
+            /* Cor ao passar o mouse no link fixo */
         }
     </style>
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark">
-        <a class="navbar-brand" href="/"><img src='/static/capacete.png' style="height: 35px" /></a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" href="/">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/chat/">Chat</a>
-                </li>
-            </ul>
+    <div class="container-fluid">
+        <nav class="navbar navbar-expand-lg navbar-dark">
+            <a class="navbar-brand" href="/"><img src='/static/capacete.png' style="height: 35px" /></a>
+            
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/chat/">Chat</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <!-- Link fixo do Movidesk -->
+        <div class="fixed-nav">
+            <a class="nav-link"
+                href="https://chat.movidesk.com/ChatWidgetNew/WidgetGroup/B47B75D5A2FC4F22B3FF76A45F35AB69">Movidesk</a>
         </div>
-    </nav>
 
-    <!-- Link fixo do Movidesk -->
-    <div class="fixed-nav">
-        <a class="nav-link" href="https://chat.movidesk.com/ChatWidgetNew/WidgetGroup/B47B75D5A2FC4F22B3FF76A45F35AB69">Movidesk</a>
+        <div class="container">
+            {% block content %}
+            {% endblock %}
+        </div>
     </div>
-
-    <div class="container">
-        {% block content %}
-        {% endblock %}
-    </div>
-
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.11/dist/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script>
-    </script>
 </body>
 
 </html>

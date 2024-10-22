@@ -28,7 +28,7 @@
         text-align: center;
     }
 
-    /* Form de Perguntas */
+    /* Estilo do Formulário de Perguntas */
     .form-control {
         background-color: #3c3939;
         color: burlywood;
@@ -39,21 +39,19 @@
         color: rgba(226, 206, 92, 0.7);
     }
 
-    #chat-card {
+    #chat-container {
         margin: 20px auto;
         max-width: 1300px;
         padding: 45px;
         border-radius: 25px;
         background-color: #232323;
         color: burlywood;
+        overflow: hidden;
+        width: 100%;
     }
 
     /* Footer */
     footer {
-        position: relative;
-        bottom: 0;
-        left: 0;
-        right: 0;
         background-color: #1c1c1c;
         padding: 35px 0;
         text-align: center;
@@ -80,7 +78,7 @@
         text-decoration: underline;
     }
 
-    .custom-btn {
+    .button {
         border: none;
         border-radius: 8px;
         padding: 10px 15px;
@@ -92,32 +90,32 @@
         margin: 0 10px;
     }
 
-    .custom-btn i {
+    .button i {
         margin-right: 5px;
     }
 
-    .custom-btn.success {
+    .button.success {
         background-color: #0c1330;
         color: burlywood;
         border: 0.3px solid #fdfed7;
     }
 
-    .custom-btn.success:hover {
+    .button.success:hover {
         background-color: #73cab8;
         transform: translateY(-2px);
     }
 
-    .custom-btn.danger {
+    .button.danger {
         background-color: #dc3545;
         color: white;
     }
 
-    .custom-btn.danger:hover {
+    .button.danger:hover {
         background-color: #c82333;
         transform: translateY(-2px);
     }
 
-    .custom-btn:disabled {
+    .button:disabled {
         background-color: #6c757d;
         cursor: not-allowed;
     }
@@ -128,171 +126,202 @@
         margin-top: 20px;
     }
 
-    .card-resposta {
+    .response-card {
         border: 2px solid #ffd9a8;
         border-radius: 10px;
-        padding: 15px;
+        padding: 20px;
         background-color: #1c1c1c;
+        margin-bottom: 20px;
+        overflow: hidden;
+        width: 100%;
     }
 
-    .imagem-wrapper {
-        width: 100% !important;
-        margin: 25px 0 !important;
-        text-align: center !important;
-    }
-
-    .imagem-wrapper img {
-        max-width: 100% !important;
-        height: auto !important;
+    .image-wrapper {
+        width: 50%;
+        margin: 25px 0;
         text-align: center;
+    }
+
+    .image-wrapper img {
+        max-width: 50%;
+        height: auto;
+        display: block;
+        margin: 0 auto;
+    }
+
+    @media (max-width: 768px) {
+        .card {
+            margin: 10px;
+        }
+
+        .card img {
+            max-height: 200px;
+        }
+    }
+
+    .image-gallery {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 20px; /* Ajuste do espaçamento */
+        margin-top: 20px;
+    }
+
+    .image-gallery a {
+        display: block;
+    }
+
+    .image-gallery img {
+        max-width: 300px; /* Ajuste do tamanho das imagens */
+        height: auto;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+    }
+
+    .image-gallery img:hover {
+        transform: scale(1.05);
     }
 </style>
 
-<div class="card" id="chat-card">
+<div class="card" id="chat-container">
     <h1>SPART <img src='/static/capacete.png' style="height: 37px; width: 40px;" /></h1>
     <h6>Seu Assistente Inteligente!!!</h6>
-    <h4>Como Posso lhe ajudar hoje?</h4>
+    <h4>Como posso lhe ajudar hoje?</h4>
     <br><br>
 
-    <input type="text" id="pergunta" class="form-control" placeholder="Escreva Aqui a Sua Dúvida!">
-    <div class="mt-4 button-container">
-        <button class="custom-btn success" onclick="enviarPergunta()">
+    <input type="text" id="question" class="form-control" placeholder="Escreva aqui a sua dúvida!">
+    <div class="button-container mt-4">
+        <button class="button success" onclick="sendQuestion()">
             <i class="fas fa-paper-plane"></i> Enviar
         </button>
-        <button class="custom-btn danger" id="pararBtn" onclick="pararEscrita()" disabled>
+        <button class="button danger" id="stopBtn" onclick="stopTyping()" disabled>
             <i class="fas fa-stop"></i> Parar
         </button>
-        <button class="custom-btn success" onclick="lerTexto()">
+        <button class="button success" onclick="readResponse()">
             <i class="fas fa-volume-up"></i> Ouvir Resposta
         </button>
     </div>
     <br>
-
-    <div class="card-resposta">
-        <div id="resposta" class="mt-3"></div>
-        <img src='/static/capacete.png' style="height: 20px; width: 22px;" />
-        <span id="resposta-texto"></span>
-        {{ manual.conteudo|safe }}
-        {% if manual.imagem %}
-        <img src="{{ manual.imagem.url }}" alt="Imagem do Manual" style="max-width: 100%; height: auto;">
-        {% endif %}
+    <div class="container">
+        <div class="response-card">
+            <div id="response" class="mt-3"></div>
+            <img src='/static/capacete.png' style="height: 20px; width: 22px;" />
+            <span id="response-text"></span>
+            {{ manual.conteudo|safe }}
+            <div class="container-fluid">
+                {% if manual.imagem %}
+                <div class="image-wrapper">
+                    <img src="{{ manual.imagem.url }}" alt="Imagem do Manual">
+                </div>
+                {% endif %}
+            </div>
+        </div>
     </div>
-</div>
+    <script>
+        let fullResponse = "";
+        let typingInterval;
+        let isTyping = false;
+        let synth = window.speechSynthesis;
 
-<div id="imageModal" class="modal" onclick="closeModal()">
-    <span class="close" onclick="closeModal()">&times;</span>
-    <img class="modal-content" id="modalImage">
-</div>
+        async function sendQuestion() {
+            const question = document.getElementById("question").value;
+            document.getElementById("response").innerHTML = "<span>Carregando...</span>";
+            document.getElementById("stopBtn").disabled = true;
 
-<script>
-    let respostaCompleta = "";
-    let typingInterval;
-    let isTyping = false;  // Controle para efeito de digitação
-    let synth = window.speechSynthesis;
-
-    async function enviarPergunta() {
-        const pergunta = document.getElementById("pergunta").value;
-        document.getElementById("resposta").innerHTML = "<span>Carregando...</span>";
-        document.getElementById("pararBtn").disabled = true;
-
-        try {
-            const response = await fetch(`/chat/perguntar/?pergunta=${encodeURIComponent(pergunta)}`);
-            if (!response.ok) {
-                throw new Error('Erro na resposta do servidor');
+            try {
+                const response = await fetch(`/chat/perguntar/?pergunta=${encodeURIComponent(question)}`);
+                if (!response.ok) {
+                    throw new Error('Erro na resposta do servidor');
+                }
+                const data = await response.json();
+                fullResponse = data.resposta || "Desculpe, não consegui responder.";
+                typeResponseWithEffect(fullResponse, data.imagens);
+            } catch (error) {
+                document.getElementById("response").innerText = "Erro ao enviar a pergunta: " + error.message;
             }
-            const data = await response.json();
-            respostaCompleta = data.resposta || "Desculpe, não consegui responder.";
-
-            escreverRespostaComEfeito(respostaCompleta, data.imagens);
-        } catch (error) {
-            document.getElementById("resposta").innerText = "Erro ao enviar a pergunta: " + error.message;
         }
-    }
 
-    function escreverRespostaComEfeito(resposta, imagens, links) {
-        const respostaDiv = document.getElementById("resposta");
-        respostaDiv.innerHTML = ""; // Limpa a resposta anterior
-        let index = 0;
-        isTyping = true;
+        function typeResponseWithEffect(response, images) {
+            const responseDiv = document.getElementById("response");
+            responseDiv.innerHTML = "";
+            let index = 0;
+            isTyping = true;
 
-        typingInterval = setInterval(() => {
-            if (index < resposta.length) {
-                const char = resposta.charAt(index);
-                respostaDiv.innerHTML += char === '\n' ? "<br>" : char;
-                index++;
-            } else {
-                finalizarDigitacao(resposta, imagens, links); // Passa também os links
-            }
-        }, 3); // Velocidade da digitação
+            typingInterval = setInterval(() => {
+                if (index < response.length) {
+                    const char = response.charAt(index);
+                    responseDiv.innerHTML += char === '\n' ? "<br>" : char;
+                    index++;
+                } else {
+                    finalizeTyping(response, images);
+                }
+            }, 3);
 
-        document.getElementById("pararBtn").disabled = false;
-    }
-
-    function finalizarDigitacao(resposta, imagens, links) {
-        clearInterval(typingInterval);
-        isTyping = false;
-        document.getElementById("pararBtn").disabled = true;
-        aplicarFormatacaoCompleta(resposta, imagens, links);
-    }
-
-    function aplicarFormatacaoCompleta(resposta, imagens, links) {
-        const respostaDiv = document.getElementById("resposta");
-        respostaDiv.innerHTML = resposta; // Insere o HTML completo
-
-        if (imagens && imagens.length > 0) {
-            const galeria = document.createElement('div');
-            galeria.className = "image-gallery"; // Classe para layout das imagens
-
-            imagens.forEach((imagem, index) => {
-                const linkElement = document.createElement('a');
-                linkElement.href = "#"; // Não abre em nova aba
-                linkElement.style.margin = "5px"; // Estilo opcional
-
-                const imgElement = document.createElement('img');
-                imgElement.src = imagem;
-                imgElement.alt = "Imagem " + (index + 1);
-                imgElement.style.maxWidth = "100%"; // Ajusta largura
-                imgElement.style.height = "auto"; // Mantém proporção
-
-                linkElement.appendChild(imgElement);
-                galeria.appendChild(linkElement);
-            });
-
-            respostaDiv.appendChild(galeria); // Adiciona galeria de imagens
+            document.getElementById("stopBtn").disabled = false;
         }
-    }
 
-
-    function pararEscrita() {
-        if (isTyping) {
+        function finalizeTyping(response, images) {
             clearInterval(typingInterval);
-            document.getElementById("resposta").innerHTML = respostaCompleta; // Exibe resposta completa
             isTyping = false;
+            document.getElementById("stopBtn").disabled = true;
+            applyFullFormatting(response, images);
         }
-    }
 
-    function lerTexto() {
-        if (synth.speaking) {
-            synth.cancel(); // Para a leitura atual
-        } else {
-            const utterance = new SpeechSynthesisUtterance(respostaCompleta);
-            synth.speak(utterance); // Inicia a leitura da resposta
+        function applyFullFormatting(response, images) {
+            const responseDiv = document.getElementById("response");
+            responseDiv.innerHTML = response;
+        
+            if (images && images.length > 0) {
+                const gallery = document.createElement('div');
+                gallery.className = "image-gallery";
+        
+                images.forEach((image, index) => {
+                    const linkElement = document.createElement('a');
+                    linkElement.href = "#";
+        
+                    const imgElement = document.createElement('img');
+                    imgElement.src = image;
+                    imgElement.alt = "Imagem " + (index + 1);
+        
+                    linkElement.appendChild(imgElement);
+                    gallery.appendChild(linkElement);
+                });
+        
+                responseDiv.appendChild(gallery);
+            }
         }
-    }
-</script>
 
-<footer>
-    <div id="footer-content">
-        <h5>Sugestões de Perguntas:</h5>
-        <ul class="list-group">
-            {% for sugestao in sugerir_perguntas %}
-            <li class="list-group-item">
-                <a href="#" onclick="document.getElementById('pergunta').value='{{ sugestao }}'; enviarPergunta();">
-                    {{ sugestao }}
-                </a>
-            </li>
-            {% endfor %}
-        </ul>
-    </div>
-</footer>
-{% endblock %}
+        function stopTyping() {
+            if (isTyping) {
+                clearInterval(typingInterval);
+                document.getElementById("response").innerHTML = fullResponse;
+                isTyping = false;
+            }
+        }
+
+        function readResponse() {
+            if (synth.speaking) {
+                synth.cancel();
+            } else {
+                const utterance = new SpeechSynthesisUtterance(fullResponse);
+                synth.speak(utterance);
+            }
+        }
+    </script>
+
+    <footer>
+        <div id="footer-content">
+            <h5>Sugestões de Perguntas:</h5>
+            <ul class="list-group">
+                {% for sugestao in sugerir_perguntas %}
+                <li class="list-group-item">
+                    <a href="#" onclick="document.getElementById('pergunta').value='{{ sugestao }}'; enviarPergunta();">
+                        {{ sugestao }}
+                    </a>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </footer>
+    {% endblock %}
