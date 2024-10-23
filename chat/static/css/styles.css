@@ -140,7 +140,7 @@ body {
   max-width: 50%;
   height: auto;
   display: block;
-  margin: 0 auto;
+  margin: auto;
 }
 
 @media (max-width: 768px) {
@@ -149,7 +149,7 @@ body {
   }
 
   .card img {
-    max-height: 200px;
+    max-height: 300px;
   }
 }
 
@@ -157,8 +157,8 @@ body {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  gap: 20px; /* Ajuste do espaçamento */
-  margin-top: 20px;
+  row-gap: 20px; /* Espaçamento vertical */
+  column-gap: 20px; /* Espaçamento horizontal */
 }
 
 .image-gallery a {
@@ -166,11 +166,13 @@ body {
 }
 
 .image-gallery img {
-  max-width: 300px; /* Ajuste do tamanho das imagens */
+  max-width: 150px; /* Ajuste do tamanho das imagens */
   height: auto;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease;
+  margin-bottom: 35px !important;
+  margin-left: 15px;
 }
 
 .image-gallery img:hover {
