@@ -1,0 +1,25 @@
+venv
+.venv
+.vscode
+ venv
+ Scripts
+ db.sqlite3
+ # Ignorar arquivos de cache
+__pycache__/
+*.pyc
+
+# Ignorar banco de dados local
+db.sqlite3
+
+# Ignorar logs
+uwsgi.log
+
+# Ignorar diretório de mídia (se não quiser versionar as imagens)
+media/
+
+# Ignorar arquivos de cache
+__pycache__/
+*.pyc
+
+# Ignorar banco de dados local
+db.sqlite3
