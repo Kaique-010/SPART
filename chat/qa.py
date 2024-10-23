@@ -22,7 +22,7 @@ def resumir_texto(texto):
         parser = PlaintextParser.from_string(" ".join(sentencas), Tokenizer("english"))
 
     summarizer = LsaSummarizer()
-    resumo = summarizer(parser.document, 5)  # Limitar a 5 frases no resumo
+    resumo = summarizer(parser.document, 10)  # Limitar a 5 frases no resumo
     return ' '.join(str(frase) for frase in resumo)
 
 
