@@ -20,9 +20,18 @@
         <button class="button danger" id="stopBtn" onclick="stopTyping()" disabled>
             <i class="fas fa-stop"></i> Parar
         </button>
+
+
         <button class="button success" onclick="readResponse()">
             <i class="fas fa-volume-up"></i> Ouvir Resposta
         </button>
+    </div>
+    <br>
+    <div class="container rate-control-container">
+        <label for="rateControl">Velocidade da Leitura:</label>
+        <input type="range" id="rateControl" min="0.5" max="3" step="0.1" value="1"
+            oninput="this.nextElementSibling.value = this.value" />
+        <output>1</output> <!-- Exibe o valor atual do slider -->
     </div>
     <br>
     <div class="container">

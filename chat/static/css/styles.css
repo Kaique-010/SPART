@@ -157,8 +157,7 @@ body {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  gap: 20px;
-  /* Ajuste do espaçamento */
+  gap: 20px; /* Ajuste do espaçamento */
   margin-top: 20px;
 }
 
@@ -167,8 +166,7 @@ body {
 }
 
 .image-gallery img {
-  max-width: 300px;
-  /* Ajuste do tamanho das imagens */
+  max-width: 300px; /* Ajuste do tamanho das imagens */
   height: auto;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -177,4 +175,50 @@ body {
 
 .image-gallery img:hover {
   transform: scale(1.05);
+}
+
+.rate-control-container {
+  display: flex; /* Ativa o flexbox */
+  flex-direction: column; /* Coloca os elementos em coluna */
+  align-items: center; /* Alinha horizontalmente ao centro */
+}
+
+/* Estilo do slider */
+input[type='range'] {
+  -webkit-appearance: none; /* Remove o estilo padrão */
+  appearance: none;
+  width: 300px; /* Largura do slider */
+  height: 8px; /* Altura da trilha */
+  background: #1e324b; /* Cor da trilha */
+  border-radius: 5px; /* Bordas arredondadas */
+  outline: none; /* Remove a borda padrão */
+}
+
+/* Estilo do thumb (botão arrastável) */
+input[type='range']::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px; /* Largura do botão */
+  height: 20px; /* Altura do botão */
+  background-color: burlywood; /* Cor do botão */
+  border-radius: 50%; /* Botão arredondado */
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3); /* Sombra do botão */
+  transition: transform 0.2s; /* Efeito de transição */
+}
+
+input[type='range']::-webkit-slider-thumb:hover {
+  transform: scale(1.8); /* Aumenta o botão ao passar o mouse */
+}
+
+input[type='range']::-moz-range-thumb {
+  width: 20px; /* Largura do botão no Firefox */
+  height: 20px; /* Altura do botão no Firefox */
+  background-color: burlywood; /* Cor do botão no Firefox */
+  border-radius: 50%; /* Botão arredondado no Firefox */
+  border: none; /* Remove a borda no Firefox */
+  transition: transform 0.2s; /* Efeito de transição */
+}
+
+input[type='range']::-moz-range-thumb:hover {
+  transform: scale(1.2); /* Aumenta o botão ao passar o mouse no Firefox */
 }

@@ -3,6 +3,7 @@ let typingInterval
 let isTyping = false
 let synth = window.speechSynthesis
 
+// Função para enviar a pergunta e exibir a resposta
 async function sendQuestion() {
   const question = document.getElementById('question').value
   document.getElementById('response').innerHTML = '<span>Carregando...</span>'
@@ -24,6 +25,7 @@ async function sendQuestion() {
   }
 }
 
+// Efeito de digitação gradual
 function typeResponseWithEffect(response, images) {
   const responseDiv = document.getElementById('response')
   responseDiv.innerHTML = ''
@@ -43,6 +45,7 @@ function typeResponseWithEffect(response, images) {
   document.getElementById('stopBtn').disabled = false
 }
 
+// Finaliza o efeito de digitação
 function finalizeTyping(response, images) {
   clearInterval(typingInterval)
   isTyping = false
@@ -50,6 +53,7 @@ function finalizeTyping(response, images) {
   applyFullFormatting(response, images)
 }
 
+// Exibe a resposta formatada e a galeria de imagens
 function applyFullFormatting(response, images) {
   const responseDiv = document.getElementById('response')
   responseDiv.innerHTML = response
@@ -74,6 +78,7 @@ function applyFullFormatting(response, images) {
   }
 }
 
+// Interrompe a digitação
 function stopTyping() {
   if (isTyping) {
     clearInterval(typingInterval)
@@ -82,11 +87,15 @@ function stopTyping() {
   }
 }
 
+// Lê a resposta com controle de velocidade
 function readResponse() {
   if (synth.speaking) {
-    synth.cancel()
+    synth.cancel() // Cancela a fala se já estiver em andamento
   } else {
-    const utterance = new SpeechSynthesisUtterance(fullResponse)
-    synth.speak(utterance)
+    const utterance = new SpeechSynthesisUtterance(fullResponse) // Cria o objeto de fala
+    const rateControl = document.getElementById('rateControl') // Pega o valor da velocidade
+
+    utterance.rate = parseFloat(rateControl.value) // Define a velocidade da leitura
+    synth.speak(utterance) // Inicia a leitura em voz alta
   }
 }
