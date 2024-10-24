@@ -25,3 +25,11 @@ class ImagemManual(models.Model):
 
     def __str__(self):
         return f"Imagem para {self.manual.titulo}"
+
+
+class Pergunta(models.Model):
+    texto = models.TextField()
+    data_hora = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.texto
