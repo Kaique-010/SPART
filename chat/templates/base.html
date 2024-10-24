@@ -131,8 +131,9 @@
                         </a>
                         <div class="dropdown-menu" aria-labelledby="perguntasDropdown">
                             {% for pergunta in perguntas %}
-                            <a class="dropdown-item" href="#">
-                                {{ pergunta.texto|truncatechars:20 }}
+                            <a class="dropdown-item d-flex justify-content-between" href="#">
+                                <span>{{ pergunta.texto|truncatechars:20 }}</span>
+                                <small class="text-muted">{{ pergunta.data_hora }}</small>
                             </a>
                             {% empty %}
                             <span class="dropdown-item">Nenhuma pergunta registrada.</span>
